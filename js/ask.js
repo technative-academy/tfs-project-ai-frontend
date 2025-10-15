@@ -88,6 +88,7 @@ class Ask {
     }
 
     processResults(data) {
+        console.log(data);
         this.resultsList.innerHTML = ''
         if (data.results.length > 0) {
             this.resultsContainer.classList.add('is-shown')
