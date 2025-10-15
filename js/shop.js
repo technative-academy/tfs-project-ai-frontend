@@ -9,6 +9,7 @@ class Shop {
             this.searchResultCount = this.searchContainer.querySelector(
                 '.search__result-count'
             )
+            this.searchSort = this.searchContainer.querySelector('.search__sort');
             this.loading =
                 this.searchContainer.querySelector('.search__loading')
 
@@ -41,7 +42,18 @@ class Shop {
             this.productsList.removeChild(this.productsList.lastChild)
         }
 
-        const url = `https://ai-project.technative.dev.f90.co.uk/products/askbeatz?query=${this.searchInput.value}`
+        let url =
+            'https://ai-project.technative.dev.f90.co.uk/products/askbeatz'
+
+        url =
+            url + '?sort=' + this.searchSort.value
+
+        if (this.searchInput.value != '') {
+            let query = encodeURIComponent(this.searchInput.value)
+            url = url + '&query=' + query
+        }
+
+
         try {
             const response = await fetch(url)
             if (!response.ok) {
@@ -61,7 +73,7 @@ class Shop {
 
     processProducts(data) {
         const searchTerm = this.searchInput.value.toLowerCase()
-        const filteredProducts = data.filter(
+        const filteredProducts = data.products.filter(
             (product) =>
                 product.title.toLowerCase().includes(searchTerm) ||
                 product.description.toLowerCase().includes(searchTerm)
