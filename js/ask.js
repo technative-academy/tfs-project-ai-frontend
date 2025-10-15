@@ -76,8 +76,11 @@ class Ask {
                 throw new Error(`Response status: ${response.status}`)
             }
 
-            const json = await response.json()
-            this.processResults(json)
+            await setTimeout(async () => {
+                const json = await response.json()
+                this.processResults(json)
+                this.loading.classList.remove('is-loading')
+            }, 1000)
         } catch (error) {
             console.error(error.message)
             this.loading.classList.remove('is-loading')
@@ -85,7 +88,7 @@ class Ask {
     }
 
     processResults(data) {
-      this.resultsList.innerHTML = '';
+        this.resultsList.innerHTML = ''
         if (data.results.length > 0) {
             this.resultsContainer.classList.add('is-shown')
         } else {
