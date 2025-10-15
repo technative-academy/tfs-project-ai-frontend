@@ -77,7 +77,6 @@ class Ask {
         const url = `https://ai-project.technative.dev.f90.co.uk/ai/happybites/?query=${query}`
         try {
             const response = await fetch(url)
-            console.log(response)
             if (!response.ok) {
                 throw new Error(`Response status: ${response.status}`)
             }
@@ -88,8 +87,7 @@ class Ask {
 
             await setTimeout(async () => {
                 const json = await response.json()
-                const data = Array.isArray(json) ? json : json.results
-                console.log(data)
+                const data = json.results
 
                 this.processResults(data)
                 this.loading.classList.remove('is-loading')
