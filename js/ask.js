@@ -109,6 +109,7 @@ class Ask {
     }
 
     processResults(data) {
+        this.resultsList.replaceChildren()
         if (data.length > 0) {
             this.resultsContainer.classList.add('is-shown')
         } else {
