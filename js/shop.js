@@ -10,6 +10,7 @@ class Shop {
                 '.search__result-count'
             )
             this.searchSort = this.searchContainer.querySelector('.search__sort');
+            this.searchPageSize = this.searchContainer.querySelector('.search__page-size')
             this.loading =
                 this.searchContainer.querySelector('.search__loading')
 
@@ -47,6 +48,8 @@ class Shop {
 
         url =
             url + '?sort=' + this.searchSort.value
+
+        url = url + '&page-size=' + this.searchPageSize.value
 
         if (this.searchInput.value != '') {
             let query = encodeURIComponent(this.searchInput.value)
