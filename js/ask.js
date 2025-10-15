@@ -80,16 +80,10 @@ class Ask {
                 throw new Error(`Response status: ${response.status}`)
             }
 
-            // fake a one second wait, use the two lines below for an instant response
-            const json = await response.json()
-            console.log(json)
-            this.processResults(
-                Array.from(json.results)
-            ) /* this has been changed as json is an Object containing an Array as its only element */
-
             await setTimeout(async () => {
                 const json = await response.json()
-                this.processResults(json)
+                this.processResults(Array.from(json.results))
+                /* this has been changed as json is an Object containing an Array as its only element */
                 this.loading.classList.remove('is-loading')
             }, 1000)
         } catch (error) {
