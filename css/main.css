@@ -1,8 +1,8 @@
 .main {
     padding: var(--spacing-l);
     max-width: var(--width-max);
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 1rem;
+    margin-right: 1rem;
     margin-top: calc(-1 * var(--spacing-xl));
     background: var(--colour-background-white);
     border-radius: var(--border-radius-l);
@@ -49,6 +49,7 @@
 .home__button {
     width: 60%;
     align-self: center;
+    text-align: center;
     font-weight: 600;
     font-size: 1rem;
 }
