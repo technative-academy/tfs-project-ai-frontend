@@ -3,6 +3,7 @@ class Ask {
 
     constructor() {
         this.askContainer = document.querySelector('.ask')
+        this.cachedResponses = {}
         if (this.askContainer) {
             this.askInput = this.askContainer.querySelector('.ask__input')
             this.exampleButton = this.askContainer.querySelector(
@@ -71,7 +72,6 @@ class Ask {
 
         const query = this.askInput.value // Get the value first
 
-        // Check cache first
         if (this.cachedResponses[query]) {
             console.log('Using cached response')
             this.processResults(this.cachedResponses[query])
@@ -96,16 +96,15 @@ class Ask {
             }
 
             const json = await response.json()
+            console.log(json)
+            const results = json.results
+            console.log(results)
 
-            // Store response in memory (cache it)
-            this.cachedResponses[query] = json
-
-            this.processResults(json)
+            this.processResults(results)
             this.loading.classList.remove('is-loading')
         } catch (error) {
             console.error('API call failed:', error.message)
             this.loading.classList.remove('is-loading')
-            this.showError('Failed to fetch results. Please try again.')
         }
     }
 
