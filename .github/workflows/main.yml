@@ -1,24 +1,25 @@
-name: Prettier Check Workflow
+name: Continuous Integration
 
-on:                    
+# This action works with pull requests and pushes
+on:
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   prettier:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Prettier Check
-        uses: rutajdash/prettier-cli-action@v1.0.2
+        uses: creyD/prettier_action@v4.6
         with:
-          file_pattern: '**/*.{js,json,css}'
-          config_path: ./.prettierrc.json
-          ignore_path: ./.prettierignore
-          prettier_version: latest
-          fail_on_error: true
+          # This part is also where you can pass other options, for example:
+          dry: True
+          prettier_options: --check **/*.{js,css,json,html}
 
       - name: Prettier Output
         if: ${{ failure() }}
