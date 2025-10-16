@@ -33,7 +33,7 @@
     border: 1px solid var(--colour-primary);
     background: var(--colour-background-white);
     color: var(--colour-primary);
-    box-shadow: 0 12px 24px rgba(133, 77, 25, 0.3); /* Using your primary color */
+    box-shadow: 0 12px 24px rgba(133, 77, 25, 0.3);
     transform: translateY(-4px);
 }
 
@@ -50,4 +50,17 @@
     border-color: var(--colour-primary);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     transform: translateY(-3px);
+}
+
+.about-section {
+    display: none;
+}
+
+.about-section--active {
+    display: block;
+}
+
+.about-nav__button--active {
+    color: var(--colour-primary);
+    font-weight: bold;
 }
