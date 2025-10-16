@@ -100,52 +100,48 @@ class Shop {
   }
 
   processProducts(data) {
-    try {
-      const searchTerm = this.searchInput.value.toLowerCase();
-      const filteredProducts = data.products.filter(
-        (product) =>
-          product.title.toLowerCase().includes(searchTerm) ||
-          product.description.toLowerCase().includes(searchTerm)
-      );
+    const searchTerm = this.searchInput.value.toLowerCase();
+    const filteredProducts = data.products.filter(
+      (product) =>
+        product.title.toLowerCase().includes(searchTerm) ||
+        product.description.toLowerCase().includes(searchTerm)
+    );
 
-      this.productsContainer.classList.add("is-shown");
+    this.productsContainer.classList.add("is-shown");
 
-      filteredProducts.forEach((product) => {
-        const productsItem = document.createElement("div");
-        productsItem.classList.add("products__item");
-        this.productsList.appendChild(productsItem);
+    filteredProducts.forEach((product) => {
+      const productsItem = document.createElement("div");
+      productsItem.classList.add("products__item");
+      this.productsList.appendChild(productsItem);
 
-        const productsItemImage = document.createElement("img");
-        productsItemImage.classList.add("products__item-image");
-        productsItemImage.src = product.img;
-        productsItem.appendChild(productsItemImage);
+      const productsItemImage = document.createElement("img");
+      productsItemImage.classList.add("products__item-image");
+      productsItemImage.src = product.img;
+      productsItem.appendChild(productsItemImage);
 
-        const productsItemTitle = document.createElement("h3");
-        productsItemTitle.classList.add("products__item-title");
-        productsItemTitle.textContent = product.title;
-        productsItem.appendChild(productsItemTitle);
+      const productsItemTitle = document.createElement("h3");
+      productsItemTitle.classList.add("products__item-title");
+      productsItemTitle.textContent = product.title;
+      productsItem.appendChild(productsItemTitle);
 
-        const productsItemDescription = document.createElement("p");
-        productsItemDescription.classList.add("products__item-description");
-        productsItemDescription.textContent = product.description;
-        productsItem.appendChild(productsItemDescription);
+      const productsItemDescription = document.createElement("p");
+      productsItemDescription.classList.add("products__item-description");
+      productsItemDescription.textContent = product.description;
+      productsItem.appendChild(productsItemDescription);
 
-        const productsItemStars = document.createElement("p");
-        productsItemStars.classList.add("products__item-stars");
-        productsItemStars.textContent = "⭐".repeat(product.stars);
-        productsItem.appendChild(productsItemStars);
+      const productsItemStars = document.createElement("p");
+      productsItemStars.classList.add("products__item-stars");
+      productsItemStars.textContent = "⭐".repeat(product.stars);
+      productsItem.appendChild(productsItemStars);
 
-        const productsItemPrice = document.createElement("p");
-        productsItemPrice.classList.add("products__item-price");
-        productsItemPrice.textContent = product.price;
-        productsItem.appendChild(productsItemPrice);
-      });
+      const productsItemPrice = document.createElement("p");
+      productsItemPrice.classList.add("products__item-price");
+      productsItemPrice.textContent = product.price;
+      productsItem.appendChild(productsItemPrice);
+    });
 
-      this.setProductsFound();
-      this.setShowMoreStatus(data.products.length);
-    } catch (error) {
-      console.error("Error processing products:", error);
-    }
+    this.setProductsFound();
+    this.setShowMoreStatus(data.products.length);
   }
 
   setProductsFound() {
