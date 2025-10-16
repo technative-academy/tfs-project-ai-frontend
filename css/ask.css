@@ -43,6 +43,16 @@
   pointer-events: none;
 }
 
+.clear__button {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.clear__button.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .ask__footer {
   margin-top: var(--spacing-l);
 }

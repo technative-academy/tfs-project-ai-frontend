@@ -17,7 +17,11 @@ class Ask {
                 this.askContainer.querySelector('.ask__char-count')
             this.loading = this.askContainer.querySelector('.ask__loading')
             this.resultsContainer = document.querySelector('.results')
+            this.showMoreButton = this.resultsContainer.querySelector(
+            '.button.button--primary'
+        )
             this.loadingMore = this.resultsContainer.querySelector('.loading__more')
+            this.clearListButton = this.resultsContainer.querySelector('.clear__button')
             this.resultsList =
                 this.resultsContainer.querySelector('.results__list')
         }
@@ -31,6 +35,9 @@ class Ask {
     this.askButton.addEventListener("click", (e) => this.askClicked(e));
     this.resetButton.addEventListener("click", (e) => this.resetClicked(e));
     this.checkInput();
+    this.showMoreButton.addEventListener("click", (e) => this.showMore(e));
+    this.clearListButton.addEventListener("click", (e) => this.resetResults(e));
+    this.askButton.addEventListener("click", (e) => this.resetResults(e))
   }
 
   checkInput() {
@@ -57,7 +64,8 @@ class Ask {
     //reset results on search button click
 
     resetResults() {
-        this.askButton.onClick = this.resultsList.innerHTML = ''
+        this.resultsContainer.classList.remove('is-shown');
+        this.clearListButton.classList.add('hidden');
     }
 
     resetClicked(event) {
@@ -69,7 +77,7 @@ class Ask {
     async askClicked() {
         this.resetResults()
         this.loading.classList.add('is-loading')
-        const url = `https://ai-project.technative.dev.f90.co.uk/ai/askbeatz/?query=${this.askInput.value}`
+        let url = `https://ai-project.technative.dev.f90.co.uk/ai/askbeatz/?query=${this.askInput.value}`
         try {
             const response = await fetch(url)
             if (!response.ok) {
@@ -91,18 +99,10 @@ class Ask {
     //function to make show more call
 
     async showMore() {
-        
-
-    if (this.resultsContainer) {
-        const showMoreButton = this.resultsContainer.querySelector(
-            '.button.button--primary'
-        )
-        if (showMoreButton) {
-            showMoreButton.addEventListener('click', async () => {
-                this.loadingMore.classList.add('is-loading')
-        const url = `https://ai-project.technative.dev.f90.co.uk/ai/askbeatz/?query=${this.askInput.value}`
+        this.loadingMore.classList.add('is-loading')
+        let url = `https://ai-project.technative.dev.f90.co.uk/ai/askbeatz/?query=${this.askInput.value}`
         try {
-            const response = await fetch(url)
+            let response = await fetch(url)
             if (!response.ok) {
                 throw new Error(`Response status: ${response.status}`)
             }
@@ -115,16 +115,16 @@ class Ask {
         } catch (error) {
             console.error(error.message)
             this.loadingMore.classList.remove('is-loading')
+        
+            
         }
-            })
-        }
-    }
+    
 
     }
 
     processResults(data) {
         console.log(data)
-
+        this.clearListButton.classList.remove('hidden')
         if (data.results.length > 0) {
             this.resultsContainer.classList.add('is-shown')
         } else {
