@@ -15,13 +15,27 @@ class Shop {
       this.productsContainer = document.querySelector(".products");
       this.productsList =
         this.productsContainer.querySelector(".products__list");
+        this.productsShowMore = this.productsContainer.querySelector(".products__show-more");
+
+      this.defaultURL = new URL(
+        "https://ai-project.technative.dev.f90.co.uk/products/askbeatz"
+      );
+
+      this.pageNumber = 1;
     }
   }
 
   init() {
     if (!this.searchContainer) return;
     this.searchInput.addEventListener("input", (e) => this.checkInput(e));
-    this.searchButton.addEventListener("click", (e) => this.search(e));
+    this.searchButton.addEventListener("click", (e) => {
+      this.clearProducts();
+      this.search(e);
+    });
+    this.productsShowMore.addEventListener("click", (e) => {
+        this.pageNumber++;
+        this.search(e);
+    });
     this.checkInput();
     this.search();
   }
@@ -34,26 +48,13 @@ class Shop {
     if (e) e.preventDefault();
 
     this.loading.classList.add("is-loading");
-    this.productsContainer.classList.remove("is-shown");
+    // this.productsContainer.classList.remove("is-shown");
     this.searchResultCount.textContent = "";
 
-    while (this.productsList.firstChild) {
-      this.productsList.removeChild(this.productsList.lastChild);
-    }
-
-    let url = "https://ai-project.technative.dev.f90.co.uk/products/askbeatz";
-
-    url = url + "?sort=" + this.searchSort.value;
-
-    url = url + "&page-size=" + this.searchPageSize.value;
-
-    if (this.searchInput.value != "") {
-      let query = encodeURIComponent(this.searchInput.value);
-      url = url + "&query=" + query;
-    }
+    let searchURL = await this.buildSearchURL();
 
     try {
-      const response = await fetch(url);
+      const response = await fetch(searchURL);
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
@@ -67,6 +68,33 @@ class Shop {
       console.error(error.message);
       this.loading.classList.remove("is-loading");
     }
+  }
+
+  async buildSearchURL() {
+    let searchURL = this.defaultURL;
+    let searchParams = new URLSearchParams();
+
+    searchParams.append("sort", this.searchSort.value);
+    searchParams.append("page-size", this.searchPageSize.value);
+    if (this.searchInput.value != "") {
+      let query = encodeURIComponent(this.searchInput.value);
+      searchParams.append("query", query);
+    }
+    if (this.pageNumber > 1) {
+        searchParams.append("page", this.pageNumber);
+    }
+
+    searchURL.search = searchParams.toString();
+    console.log("Search URL:", searchURL.toString());
+
+    return searchURL;
+  }
+
+  clearProducts() {
+    while (this.productsList.firstChild) {
+      this.productsList.removeChild(this.productsList.lastChild);
+    };
+    this.pageNumber = 1;
   }
 
   processProducts(data) {
