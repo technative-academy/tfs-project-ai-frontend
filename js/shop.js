@@ -116,7 +116,7 @@ class Shop {
 
       const productsItemImage = document.createElement("img");
       productsItemImage.classList.add("products__item-image");
-      productsItemImage.src = product.img;
+      productsItemImage.src = "https://ai-project.technative.dev.f90.co.uk" + product.image;
       productsItem.appendChild(productsItemImage);
 
       const productsItemTitle = document.createElement("h3");
@@ -152,6 +152,7 @@ class Shop {
 
   setShowMoreStatus(items) {
     const noResults = document.createElement("p");
+    noResults.classList.add("products__no-results");
     this.productsShowMore.style.display = "block";
 
     if (items == this.searchPageSize.value) {
@@ -159,10 +160,10 @@ class Shop {
     } else if (items == 0) {
       if (this.productsList.childElementCount === 0) {
         noResults.textContent = "No products found";
-        this.productsList.appendChild(noResults);
+        this.productsContainer.appendChild(noResults);
       } else {
         noResults.textContent = "No more products found";
-        this.productsList.appendChild(noResults);
+        this.productsContainer.appendChild(noResults);
       }
       this.productsShowMore.style.display = "none";
     } else if (this.pageNumber > 1) {
