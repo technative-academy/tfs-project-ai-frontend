@@ -15,7 +15,8 @@ class HideContent {
             if (event == null) {
                 const showMoreButton = document.createElement('button')
                 showMoreButton.textContent = 'Show more'
-                showMoreButton.classList.add('show__more__button')
+                showMoreButton.classList.add('button')
+                showMoreButton.classList.add('button--primary')
                 showMoreButton.addEventListener('click', (event) =>
                     this.showContent(event)
                 )
