@@ -68,6 +68,14 @@
   display: none;
 }
 
+.loading__more {
+  display: none;
+}
+
 .ask__loading.is-loading {
+  display: block;
+}
+
+.loading__more.is-loading {
   display: block;
 }

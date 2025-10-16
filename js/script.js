@@ -1,7 +1,7 @@
 import ask from "./ask.js";
 import shop from "./shop.js";
-import showMore from "./showMore.js";
+
 
 ask.init();
+ask.showMore();
 shop.init();
-showMore();
