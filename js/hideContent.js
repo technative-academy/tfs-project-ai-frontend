@@ -1,11 +1,11 @@
 class HideContent {
-    constructor(contentWrapper, showMoreWrapper) {
+    constructor(contentWrapper, showMoreWrapper, maxElementsOnPage = 6) {
         this.contentWrapper = contentWrapper
         this.showMoreWrapper = showMoreWrapper
     }
 
     hideContent(event = null) {
-        if (this.contentWrapper.childElementCount > 6) {
+        if (this.contentWrapper.childElementCount > maxElementsOnPage) {
             Array.from(this.contentWrapper.children).forEach((child, index) => {
                 if (index >= 6) {
                     child.classList.add('products__hidden-item')
