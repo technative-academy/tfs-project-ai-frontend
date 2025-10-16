@@ -15,6 +15,8 @@ class Shop {
             this.productsContainer = document.querySelector('.products')
             this.productsList =
                 this.productsContainer.querySelector('.products__list')
+            this.sortSelect =
+                this.searchContainer.querySelector('.search__sort')
         }
     }
 
@@ -24,6 +26,9 @@ class Shop {
         this.searchButton.addEventListener('click', (e) => this.search(e))
         this.checkInput()
         this.search()
+        if (this.sortSelect) {
+            this.sortSelect.addEventListener('change', () => this.search())
+        }
     }
 
     checkInput() {
@@ -79,8 +84,13 @@ class Shop {
         } else {
             this.productsContainer.classList.remove('is-shown')
         }
+        const sortOrder = this.sortSelect ? this.sortSelect.value : 'asc'
+        const sortedProducts = this.sortProductsByPrice(
+            filteredProducts,
+            sortOrder
+        )
 
-        filteredProducts.forEach((product) => {
+        sortedProducts.forEach((product) => {
             const productsItem = document.createElement('div')
             productsItem.classList.add('products__item')
             this.productsList.appendChild(productsItem)
@@ -108,8 +118,16 @@ class Shop {
 
             const productsItemPrice = document.createElement('p')
             productsItemPrice.classList.add('products__item-price')
-            productsItemPrice.textContent = product.price
+            productsItemPrice.textContent = `£${product.price}`
             productsItem.appendChild(productsItemPrice)
+        })
+    }
+    sortProductsByPrice(products, order = 'asc') {
+        return products.sort((a, b) => {
+            const priceA = parseFloat(a.price.replace(/[^0-9.]/g, '')) || 0
+            const priceB = parseFloat(b.price.replace(/[^0-9.]/g, '')) || 0
+
+            return order === 'asc' ? priceA - priceB : priceB - priceA
         })
     }
 }
