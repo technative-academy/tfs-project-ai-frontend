@@ -2,6 +2,8 @@ class Shop {
     constructor() {
         this.searchContainer = document.querySelector('.search')
         if (this.searchContainer) {
+            this.sortSelect =
+                this.searchContainer.querySelector('.search__sort')
             this.searchInput =
                 this.searchContainer.querySelector('.search__input')
             this.searchButton =
@@ -22,6 +24,7 @@ class Shop {
         if (!this.searchContainer) return
         this.searchInput.addEventListener('input', (e) => this.checkInput(e))
         this.searchButton.addEventListener('click', (e) => this.search(e))
+        this.sortSelect.addEventListener('change', () => this.sortProducts())
         this.checkInput()
         this.search()
     }
@@ -49,10 +52,12 @@ class Shop {
                 throw new Error(`Response status: ${response.status}`)
             }
 
-            await setTimeout(async () => {
-                const json = await response.json()
-                console.log(json)
-                this.processProducts(json.products)
+            const json = await response.json()
+            this.allProducts = json.products
+            console.log('Products fetched:', this.allProducts)
+
+            setTimeout(() => {
+                this.processProducts(this.allProducts)
                 this.loading.classList.remove('is-loading')
             }, 1000)
         } catch (error) {
@@ -61,13 +66,15 @@ class Shop {
         }
     }
 
-    processProducts(data) {
+    processProducts(data, skipFilter = false) {
         const searchTerm = this.searchInput.value.toLowerCase()
-        const filteredProducts = data.filter(
-            (product) =>
-                product.title.toLowerCase().includes(searchTerm) ||
-                product.description.toLowerCase().includes(searchTerm)
-        )
+        const filteredProducts = skipFilter
+            ? data
+            : data.filter(
+                  (product) =>
+                      product.title.toLowerCase().includes(searchTerm) ||
+                      product.description.toLowerCase().includes(searchTerm)
+              )
 
         this.searchResultCount.textContent = `${filteredProducts.length} products found`
 
@@ -75,6 +82,10 @@ class Shop {
             this.productsContainer.classList.add('is-shown')
         } else {
             this.productsContainer.classList.remove('is-shown')
+        }
+
+        while (this.productsList.firstChild) {
+            this.productsList.removeChild(this.productsList.lastChild)
         }
 
         filteredProducts.forEach((product) => {
@@ -107,6 +118,24 @@ class Shop {
             productsItemPrice.textContent = product.price
             productsItem.appendChild(productsItemPrice)
         })
+    }
+
+    sortProducts() {
+        console.log('Sort triggered:', this.sortSelect.value)
+        console.log('Products before sort:', this.allProducts)
+
+        const sortValue = this.sortSelect.value
+
+        if (sortValue === 'lowToHigh') {
+            this.allProducts.sort((a, b) => a.price - b.price)
+        } else if (sortValue === 'highToLow') {
+            this.allProducts.sort((a, b) => b.price - a.price)
+        } else if (sortValue === 'alphabeticalOrder') {
+        this.allProducts.sort((a, b) => {
+            return a.title.localeCompare(b.title)
+        })
+    }
+        this.processProducts(this.allProducts, true)
     }
 }
 
