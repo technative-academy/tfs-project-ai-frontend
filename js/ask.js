@@ -1,20 +1,26 @@
+
+
 class Ask {
   maxLength = 160;
 
-  constructor() {
-    this.askContainer = document.querySelector(".ask");
-    if (this.askContainer) {
-      this.askInput = this.askContainer.querySelector(".ask__input");
-      this.exampleButton = this.askContainer.querySelector(
-        ".ask__button-example"
-      );
-      this.askButton = this.askContainer.querySelector(".ask__button-ask");
-      this.resetButton = this.askContainer.querySelector(".ask__button-reset");
-      this.charCounter = this.askContainer.querySelector(".ask__char-count");
-      this.loading = this.askContainer.querySelector(".ask__loading");
-
-      this.resultsContainer = document.querySelector(".results");
-      this.resultsList = this.resultsContainer.querySelector(".results__list");
+    constructor() {
+        this.askContainer = document.querySelector('.ask')
+        if (this.askContainer) {
+            this.askInput = this.askContainer.querySelector('.ask__input')
+            this.exampleButton = this.askContainer.querySelector(
+                '.ask__button-example'
+            )
+            this.askButton = this.askContainer.querySelector('.ask__button-ask')
+            this.resetButton =
+                this.askContainer.querySelector('.ask__button-reset')
+            this.charCounter =
+                this.askContainer.querySelector('.ask__char-count')
+            this.loading = this.askContainer.querySelector('.ask__loading')
+            this.resultsContainer = document.querySelector('.results')
+            this.loadingMore = this.resultsContainer.querySelector('.loading__more')
+            this.resultsList =
+                this.resultsContainer.querySelector('.results__list')
+        }
     }
   }
 
@@ -39,60 +45,97 @@ class Ask {
     }
     this.charCounter.textContent = `${charsRemaining} characters remaining`;
 
-    // check whether to display example button
-    if (this.askInput.value.length === 0) {
-      this.askButton.disabled = true;
-      this.exampleButton.classList.remove("is-hidden");
-    } else {
-      this.exampleButton.classList.add("is-hidden");
+    setExample(event) {
+        event.preventDefault()
+        console.log('setting example')
+        this.askInput.value =
+            'Full of energy, bouncing off the walls'
+        this.checkInput()
     }
   }
 
-  setExample(event) {
-    event.preventDefault();
-    console.log("setting example");
-    this.askInput.value =
-      "Tell me about some of the best things I could see with a telescope from Brighton (assuming it ever stops raining)";
-    this.checkInput();
-  }
+    //reset results on search button click
 
-  resetClicked(event) {
-    event.preventDefault();
-    this.askInput.value = "";
-    this.checkInput();
-  }
+    resetResults() {
+        this.askButton.onClick = this.resultsList.innerHTML = ''
+    }
 
-  async askClicked(event) {
-    event.preventDefault();
-    this.loading.classList.add("is-loading");
+    resetClicked(event) {
+        event.preventDefault()
+        this.askInput.value = ''
+        this.checkInput()
+    }
 
-    const url = `https://ai-project.technative.dev.f90.co.uk/ai/askbeatz/?query=${this.askInput.value}`;
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
+    async askClicked() {
+        this.resetResults()
+        this.loading.classList.add('is-loading')
+        const url = `https://ai-project.technative.dev.f90.co.uk/ai/askbeatz/?query=${this.askInput.value}`
+        try {
+            const response = await fetch(url)
+            if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`)
+            }
 
-      const json = await response.json();
-      this.processResults(json);
-    } catch (error) {
-      console.error(error.message);
-      this.loading.classList.remove("is-loading");
+            await setTimeout(async () => {
+                const json = await response.json()
+                this.processResults(json)
+                this.loading.classList.remove('is-loading')
+            }, 1000)
+        } catch (error) {
+            console.error(error.message)
+            this.loading.classList.remove('is-loading')
+        }
     }
   }
 
-  processResults(data) {
-    this.resultsList.innerHTML = "";
-    if (data.results.length > 0) {
-      this.resultsContainer.classList.add("is-shown");
-    } else {
-      this.resultsContainer.classList.remove("is-shown");
+    //function to make show more call
+
+    async showMore() {
+        
+
+    if (this.resultsContainer) {
+        const showMoreButton = this.resultsContainer.querySelector(
+            '.button.button--primary'
+        )
+        if (showMoreButton) {
+            showMoreButton.addEventListener('click', async () => {
+                this.loadingMore.classList.add('is-loading')
+        const url = `https://ai-project.technative.dev.f90.co.uk/ai/askbeatz/?query=${this.askInput.value}`
+        try {
+            const response = await fetch(url)
+            if (!response.ok) {
+                throw new Error(`Response status: ${response.status}`)
+            }
+
+            await setTimeout(async () => {
+                const json = await response.json()
+                this.processResults(json)
+                this.loadingMore.classList.remove('is-loading')
+            }, 1000)
+        } catch (error) {
+            console.error(error.message)
+            this.loadingMore.classList.remove('is-loading')
+        }
+            })
+        }
     }
 
-    data.results.forEach((result) => {
-      const resultsItem = document.createElement("div");
-      resultsItem.classList.add("results__item");
-      this.resultsList.appendChild(resultsItem);
+    }
+
+    processResults(data) {
+        console.log(data)
+
+        if (data.results.length > 0) {
+            this.resultsContainer.classList.add('is-shown')
+        } else {
+            this.resultsContainer.classList.remove('is-shown')
+        }
+
+        data.results.forEach((result) => {
+            const resultsItem = document.createElement('div')
+            resultsItem.classList.add('results__item')
+            this.resultsList.appendChild(resultsItem)
+            
 
       const resultsItemTitle = document.createElement("h3");
       resultsItemTitle.classList.add("results__item-title");
