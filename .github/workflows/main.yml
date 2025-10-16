@@ -19,3 +19,10 @@ jobs:
           ignore_path: ./.prettierignore
           prettier_version: latest
           fail_on_error: true
+
+      - name: Prettier Output
+        if: ${{ failure() }}
+        shell: bash
+        run: |
+          echo "The following files are not formatted:"
+          echo "${{steps.prettier-run.outputs.prettier_output}}"
