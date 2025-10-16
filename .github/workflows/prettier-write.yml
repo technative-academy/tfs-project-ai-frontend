@@ -3,8 +3,6 @@ name: Prettier Auto-Fix
 # This action works with pushes only
 on:
     push:
-        branches:
-            - main
 
 jobs:
     prettier-fix:
