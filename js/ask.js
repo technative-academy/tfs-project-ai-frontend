@@ -22,7 +22,7 @@ class Ask {
                 this.resultsContainer.querySelector('.results__list')
         }
     }
-  }
+  
 
   init() {
     if (!this.askContainer) return;
@@ -44,7 +44,7 @@ class Ask {
       this.charCounter.classList.remove("has-error");
     }
     this.charCounter.textContent = `${charsRemaining} characters remaining`;
-
+  }
     setExample(event) {
         event.preventDefault()
         console.log('setting example')
@@ -52,7 +52,7 @@ class Ask {
             'Full of energy, bouncing off the walls'
         this.checkInput()
     }
-  }
+  
 
     //reset results on search button click
 
@@ -86,7 +86,7 @@ class Ask {
             this.loading.classList.remove('is-loading')
         }
     }
-  }
+  
 
     //function to make show more call
 
@@ -149,6 +149,7 @@ class Ask {
     });
   }
 }
+
 
 // Expose an instance of the 'Ask' class
 export default new Ask();
