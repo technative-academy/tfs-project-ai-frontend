@@ -1,0 +1,21 @@
+name: Prettier Check Workflow
+
+on:                    
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prettier Check
+        uses: rutajdash/prettier-cli-action@v1.0.2
+        with:
+          file_pattern: '**/*.js'
+          config_path: ./.prettierrc
+          ignore_path: ./.prettierignore
+          prettier_version: latest
+          fail_on_error: true
