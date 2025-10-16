@@ -3,5 +3,5 @@ import shop from "./shop.js";
 
 
 ask.init();
-ask.showMore();
 shop.init();
+
