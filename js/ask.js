@@ -56,7 +56,7 @@ class Ask {
         event.preventDefault()
         console.log('setting example')
         this.askInput.value =
-            'Tell me about some of the best things I could see with a telescope from Brighton (assuming it ever stops raining)'
+            'I want a job in Hobbiton!'
         this.checkInput()
     }
 
