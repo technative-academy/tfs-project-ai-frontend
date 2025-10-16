@@ -1,7 +1,7 @@
 
 
 class Ask {
-    maxLength = 160
+  maxLength = 160;
 
     constructor() {
         this.askContainer = document.querySelector('.ask')
@@ -22,36 +22,28 @@ class Ask {
                 this.resultsContainer.querySelector('.results__list')
         }
     }
+  }
 
-    init() {
-        if (!this.askContainer) return
-        this.askInput.addEventListener('input', (e) => this.checkInput(e))
-        this.exampleButton.addEventListener('click', (e) => this.setExample(e))
-        this.askButton.addEventListener('click', (e) => this.askClicked(e))
-        this.resetButton.addEventListener('click', (e) => this.resetClicked(e))
-        this.checkInput()
+  init() {
+    if (!this.askContainer) return;
+    this.askInput.addEventListener("input", (e) => this.checkInput(e));
+    this.exampleButton.addEventListener("click", (e) => this.setExample(e));
+    this.askButton.addEventListener("click", (e) => this.askClicked(e));
+    this.resetButton.addEventListener("click", (e) => this.resetClicked(e));
+    this.checkInput();
+  }
+
+  checkInput() {
+    // check submission validity
+    const charsRemaining = this.maxLength - this.askInput.value.length;
+    if (charsRemaining < 0) {
+      this.askButton.disabled = true;
+      this.charCounter.classList.add("has-error");
+    } else {
+      this.askButton.disabled = false;
+      this.charCounter.classList.remove("has-error");
     }
-
-    checkInput() {
-        // check submission validity
-        const charsRemaining = this.maxLength - this.askInput.value.length
-        if (charsRemaining < 0) {
-            this.askButton.disabled = true
-            this.charCounter.classList.add('has-error')
-        } else {
-            this.askButton.disabled = false
-            this.charCounter.classList.remove('has-error')
-        }
-        this.charCounter.textContent = `${charsRemaining} characters remaining`
-
-        // check whether to display example button
-        if (this.askInput.value.length === 0) {
-            this.askButton.disabled = true
-            this.exampleButton.classList.remove('is-hidden')
-        } else {
-            this.exampleButton.classList.add('is-hidden')
-        }
-    }
+    this.charCounter.textContent = `${charsRemaining} characters remaining`;
 
     setExample(event) {
         event.preventDefault()
@@ -60,6 +52,7 @@ class Ask {
             'Full of energy, bouncing off the walls'
         this.checkInput()
     }
+  }
 
     //reset results on search button click
 
@@ -93,6 +86,7 @@ class Ask {
             this.loading.classList.remove('is-loading')
         }
     }
+  }
 
     //function to make show more call
 
@@ -143,18 +137,18 @@ class Ask {
             this.resultsList.appendChild(resultsItem)
             
 
-            const resultsItemTitle = document.createElement('h3')
-            resultsItemTitle.classList.add('results__item-title')
-            resultsItemTitle.textContent = result.title
-            resultsItem.appendChild(resultsItemTitle)
+      const resultsItemTitle = document.createElement("h3");
+      resultsItemTitle.classList.add("results__item-title");
+      resultsItemTitle.textContent = result.title;
+      resultsItem.appendChild(resultsItemTitle);
 
-            const resultsItemDescription = document.createElement('p')
-            resultsItemDescription.classList.add('results__item-description')
-            resultsItemDescription.textContent = result.description
-            resultsItem.appendChild(resultsItemDescription)
-        })
-    }
+      const resultsItemDescription = document.createElement("p");
+      resultsItemDescription.classList.add("results__item-description");
+      resultsItemDescription.textContent = result.description;
+      resultsItem.appendChild(resultsItemDescription);
+    });
+  }
 }
 
 // Expose an instance of the 'Ask' class
-export default new Ask()
+export default new Ask();
