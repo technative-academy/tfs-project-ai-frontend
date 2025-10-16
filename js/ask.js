@@ -98,22 +98,46 @@ class Ask {
         } else {
             this.resultsContainer.classList.remove('is-shown')
         }
+        console.log(this.resultsList.querySelector('.results__item'))
+        if (this.resultsList.querySelector('.results__item') == null) {
+            data.forEach((result, index) => {
+                const resultsItem = document.createElement('div')
+                resultsItem.classList.add('results__item')
+                resultsItem.id = `result${index}`
+                this.resultsList.appendChild(resultsItem)
 
-        data.forEach((result) => {
-            const resultsItem = document.createElement('div')
-            resultsItem.classList.add('results__item')
-            this.resultsList.appendChild(resultsItem)
+                const resultsItemTitle = document.createElement('h3')
+                resultsItemTitle.classList.add('results__item-title')
+                resultsItemTitle.textContent = result.title
+                resultsItem.appendChild(resultsItemTitle)
 
-            const resultsItemTitle = document.createElement('h3')
-            resultsItemTitle.classList.add('results__item-title')
-            resultsItemTitle.textContent = result.title
-            resultsItem.appendChild(resultsItemTitle)
+                const resultsItemDescription = document.createElement('p')
+                resultsItemDescription.classList.add(
+                    'results__item-description'
+                )
+                resultsItemDescription.textContent = result.description
+                resultsItem.appendChild(resultsItemDescription)
+                localStorage.setItem(result.title, result.description)
+            })
+        } else {
+            data.forEach((result, index) => {
+                document
+                    .getElementById(`result${index}`)
+                    .querySelector('.results__item-title').textContent =
+                    result.title
+                document
+                    .getElementById(`result${index}`)
+                    .querySelector('.results__item-description').textContent =
+                    result.description
+                localStorage.setItem(result.title, result.description)
+            })
+        }
 
-            const resultsItemDescription = document.createElement('p')
-            resultsItemDescription.classList.add('results__item-description')
-            resultsItemDescription.textContent = result.description
-            resultsItem.appendChild(resultsItemDescription)
-        })
+        /*localStorage.setItem(this.getFormattedInput(), data)
+        
+            if to save historical data based on the query
+
+        */
     }
 }
 
