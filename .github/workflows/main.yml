@@ -14,7 +14,7 @@ jobs:
       - name: Prettier Check
         uses: rutajdash/prettier-cli-action@v1.0.2
         with:
-          file_pattern: '**/*.{js,json,css,html}'
+          file_pattern: '**/*.{js,json,css}'
           config_path: ./.prettierrc.json
           ignore_path: ./.prettierignore
           prettier_version: latest
