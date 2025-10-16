@@ -15,7 +15,9 @@ class Shop {
       this.productsContainer = document.querySelector(".products");
       this.productsList =
         this.productsContainer.querySelector(".products__list");
-        this.productsShowMore = this.productsContainer.querySelector(".products__show-more");
+      this.productsShowMore = this.productsContainer.querySelector(
+        ".products__show-more"
+      );
 
       this.defaultURL = new URL(
         "https://ai-project.technative.dev.f90.co.uk/products/askbeatz"
@@ -33,8 +35,8 @@ class Shop {
       this.search(e);
     });
     this.productsShowMore.addEventListener("click", (e) => {
-        this.pageNumber++;
-        this.search(e);
+      this.pageNumber++;
+      this.search(e);
     });
     this.checkInput();
     this.search();
@@ -81,7 +83,7 @@ class Shop {
       searchParams.append("query", query);
     }
     if (this.pageNumber > 1) {
-        searchParams.append("page", this.pageNumber);
+      searchParams.append("page", this.pageNumber);
     }
 
     searchURL.search = searchParams.toString();
@@ -93,56 +95,88 @@ class Shop {
   clearProducts() {
     while (this.productsList.firstChild) {
       this.productsList.removeChild(this.productsList.lastChild);
-    };
+    }
     this.pageNumber = 1;
   }
 
   processProducts(data) {
-    const searchTerm = this.searchInput.value.toLowerCase();
-    const filteredProducts = data.products.filter(
-      (product) =>
-        product.title.toLowerCase().includes(searchTerm) ||
-        product.description.toLowerCase().includes(searchTerm)
-    );
+    try {
+      const searchTerm = this.searchInput.value.toLowerCase();
+      const filteredProducts = data.products.filter(
+        (product) =>
+          product.title.toLowerCase().includes(searchTerm) ||
+          product.description.toLowerCase().includes(searchTerm)
+      );
 
-    this.searchResultCount.textContent = `${filteredProducts.length} products found`;
-
-    if (filteredProducts.length > 0) {
       this.productsContainer.classList.add("is-shown");
-    } else {
-      this.productsContainer.classList.remove("is-shown");
+
+      filteredProducts.forEach((product) => {
+        const productsItem = document.createElement("div");
+        productsItem.classList.add("products__item");
+        this.productsList.appendChild(productsItem);
+
+        const productsItemImage = document.createElement("img");
+        productsItemImage.classList.add("products__item-image");
+        productsItemImage.src = product.img;
+        productsItem.appendChild(productsItemImage);
+
+        const productsItemTitle = document.createElement("h3");
+        productsItemTitle.classList.add("products__item-title");
+        productsItemTitle.textContent = product.title;
+        productsItem.appendChild(productsItemTitle);
+
+        const productsItemDescription = document.createElement("p");
+        productsItemDescription.classList.add("products__item-description");
+        productsItemDescription.textContent = product.description;
+        productsItem.appendChild(productsItemDescription);
+
+        const productsItemStars = document.createElement("p");
+        productsItemStars.classList.add("products__item-stars");
+        productsItemStars.textContent = "⭐".repeat(product.stars);
+        productsItem.appendChild(productsItemStars);
+
+        const productsItemPrice = document.createElement("p");
+        productsItemPrice.classList.add("products__item-price");
+        productsItemPrice.textContent = product.price;
+        productsItem.appendChild(productsItemPrice);
+      });
+
+      this.setProductsFound();
+      this.setShowMoreStatus(data.products.length);
+    } catch (error) {
+      console.error("Error processing products:", error);
     }
+  }
 
-    filteredProducts.forEach((product) => {
-      const productsItem = document.createElement("div");
-      productsItem.classList.add("products__item");
-      this.productsList.appendChild(productsItem);
+  setProductsFound() {
+    this.searchResultCount.textContent = `${
+      this.productsList.querySelectorAll(".products__item").length
+    } products found`;
+  }
 
-      const productsItemImage = document.createElement("img");
-      productsItemImage.classList.add("products__item-image");
-      productsItemImage.src = product.img;
-      productsItem.appendChild(productsItemImage);
+  setShowMoreStatus(items) {
+    const noResults = document.createElement("p");
+    this.productsShowMore.style.display = "block";
 
-      const productsItemTitle = document.createElement("h3");
-      productsItemTitle.classList.add("products__item-title");
-      productsItemTitle.textContent = product.title;
-      productsItem.appendChild(productsItemTitle);
-
-      const productsItemDescription = document.createElement("p");
-      productsItemDescription.classList.add("products__item-description");
-      productsItemDescription.textContent = product.description;
-      productsItem.appendChild(productsItemDescription);
-
-      const productsItemStars = document.createElement("p");
-      productsItemStars.classList.add("products__item-stars");
-      productsItemStars.textContent = "⭐".repeat(product.stars);
-      productsItem.appendChild(productsItemStars);
-
-      const productsItemPrice = document.createElement("p");
-      productsItemPrice.classList.add("products__item-price");
-      productsItemPrice.textContent = product.price;
-      productsItem.appendChild(productsItemPrice);
-    });
+    if (items == this.searchPageSize.value) {
+      return;
+    } else if (items == 0) {
+      if (this.productsList.childElementCount === 0) {
+        noResults.textContent = "No products found";
+        this.productsList.appendChild(noResults);
+      } else {
+        noResults.textContent = "No more products found";
+        this.productsList.appendChild(noResults);
+      }
+      this.productsShowMore.style.display = "none";
+    } else if (this.pageNumber > 1) {
+      noResults.textContent = "No more products found";
+      this.productsContainer.appendChild(noResults);
+      this.productsShowMore.style.display = "none";
+    } else {
+      this.productsShowMore.style.display = "none";
+      return;
+    }
   }
 }
 
