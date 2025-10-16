@@ -55,8 +55,7 @@ class Ask {
     setExample(event) {
         event.preventDefault()
         console.log('setting example')
-        this.askInput.value =
-            'I want a job in Hobbiton!'
+        this.askInput.value = 'I want a job in Hobbiton!'
         this.checkInput()
     }
 
