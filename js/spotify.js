@@ -2,7 +2,7 @@
 
 let accessToken;
 const clientID = "5469abf229334a49a34f3ca365e3005f";
-const redirectUrl = "http://127.0.0.1:5500/callback";
+const redirectUrl = "https://ask-beatz-l7t8zurq4-mattnightingales-projects.vercel.app";
 
 const Spotify = {
     getAccessToken() {
