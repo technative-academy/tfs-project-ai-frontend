@@ -69,22 +69,40 @@ class Ask {
       this.resetResults();
       this.askInput.value = "So happy, smiling bigger than the cheshire cat";
       this.askButton.click();
+      this.button1.classList.add("button--secondary");
+      this.button2.classList.remove("button--secondary");
+      this.button3.classList.remove('button--secondary')
+      this.button4.classList.remove('button--secondary')
     }
     if (buttonClicked === this.button2) {
       this.resetResults();
       this.askInput.value = "Grrrrrrrr let me break something";
       this.askButton.click();
+      this.button2.classList.add("button--secondary");
+      this.button1.classList.remove("button--secondary");
+      this.button3.classList.remove('button--secondary')
+      this.button4.classList.remove('button--secondary')
     }
+
     if (buttonClicked === this.button3) {
       this.resetResults();
       this.askInput.value = "Soooooo tired, can't keep my eyes open";
       this.askButton.click();
+      this.button3.classList.add("button--secondary");
+      this.button2.classList.remove("button--secondary");
+      this.button1.classList.remove('button--secondary')
+      this.button4.classList.remove('button--secondary')
     }
+
     if (buttonClicked === this.button4) {
       this.resetResults();
       this.askInput.value =
         "Wwwwooooooooo let's go, I'm bouncing off the walls";
       this.askButton.click();
+      this.button4.classList.add("button--secondary");
+      this.button2.classList.remove("button--secondary");
+      this.button3.classList.remove('button--secondary')
+      this.button1.classList.remove('button--secondary')
     }
   }
 
