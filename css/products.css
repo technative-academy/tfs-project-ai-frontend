@@ -9,6 +9,10 @@
     display: block;
 }
 
+.products__hidden-item {
+    display: none;
+}
+
 .products__list {
     display: flex;
     flex-wrap: wrap;

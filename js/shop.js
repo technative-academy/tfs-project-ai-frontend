@@ -1,3 +1,6 @@
+import HideContent from './hideContent.js'
+import hideContent from './hideContent.js'
+
 class Shop {
     constructor() {
         this.searchContainer = document.querySelector('.search')
@@ -17,6 +20,13 @@ class Shop {
             this.productsContainer = document.querySelector('.products')
             this.productsList =
                 this.productsContainer.querySelector('.products__list')
+            this.productsShowMore = document.querySelector(
+                '.products__show-more'
+            )
+            this.hideContentManager = new HideContent(
+                this.productsList,
+                this.productsShowMore
+            )
         }
     }
 
@@ -118,6 +128,7 @@ class Shop {
             productsItemPrice.textContent = product.price
             productsItem.appendChild(productsItemPrice)
         })
+        this.hideContentManager.hideContent()
     }
 
     sortProducts() {
