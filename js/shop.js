@@ -131,10 +131,10 @@ class Shop {
         } else if (sortValue === 'highToLow') {
             this.allProducts.sort((a, b) => b.price - a.price)
         } else if (sortValue === 'alphabeticalOrder') {
-        this.allProducts.sort((a, b) => {
-            return a.title.localeCompare(b.title)
-        })
-    }
+            this.allProducts.sort((a, b) => {
+                return a.title.localeCompare(b.title)
+            })
+        }
         this.processProducts(this.allProducts, true)
     }
 }
