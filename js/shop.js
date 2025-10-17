@@ -10,9 +10,10 @@ class Shop {
       this.searchSort = this.searchContainer.querySelector(".search__sort");
       this.searchPageSize =
         this.searchContainer.querySelector(".search__page-size");
-      this.loading = this.searchContainer.querySelector(".search__loading");
+      
 
       this.productsContainer = document.querySelector(".products");
+      this.loading = this.productsContainer.querySelector(".search__loading");
       this.productsList =
         this.productsContainer.querySelector(".products__list");
       this.productsShowMore = this.productsContainer.querySelector(
@@ -50,8 +51,7 @@ class Shop {
     if (e) e.preventDefault();
 
     this.loading.classList.add("is-loading");
-    // this.productsContainer.classList.remove("is-shown");
-    this.searchResultCount.textContent = "";
+    this.searchResultCount.textContent = "Loading...";
 
     let searchURL = await this.buildSearchURL();
 
