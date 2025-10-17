@@ -9,15 +9,25 @@ class Ask {
         this.askContainer = document.querySelector('.ask')
         if (this.askContainer) {
             this.askInput = this.askContainer.querySelector('.ask__input')
-            this.exampleButton = this.askContainer.querySelector(
-                '.ask__button-example'
+            this.exampleButton = this.askContainer.querySelector('.ask__button--example')
+            this.button1 = this.askContainer.querySelector(
+                '.button__1'
+            )
+            this.button2 = this.askContainer.querySelector(
+                '.button__2'
+            )
+            this.button3 = this.askContainer.querySelector(
+                '.button__3'
+            )
+            this.button4 = this.askContainer.querySelector(
+                '.button__4'
             )
             this.askButton = this.askContainer.querySelector('.ask__button-ask')
             this.resetButton =
                 this.askContainer.querySelector('.ask__button-reset')
             this.charCounter =
                 this.askContainer.querySelector('.ask__char-count')
-            this.loading = this.askContainer.querySelector('.ask__loading')
+            this.loading = this.askContainer.querySelector('.search__loading')
             this.resultsContainer = document.querySelector('.results')
             this.showMoreButton = this.resultsContainer.querySelector(
             '.button.button--primary'
@@ -33,7 +43,10 @@ class Ask {
   init() {
     if (!this.askContainer) return;
     this.askInput.addEventListener("input", (e) => this.checkInput(e));
-    this.exampleButton.addEventListener("click", (e) => this.setExample(e));
+    this.button1.addEventListener("click", (e) => this.setExample(e));
+    this.button2.addEventListener("click", (e) => this.setExample(e));
+    this.button3.addEventListener("click", (e) => this.setExample(e));
+    this.button4.addEventListener("click", (e) => this.setExample(e));
     this.askButton.addEventListener("click", (e) => this.askClicked(e));
     this.resetButton.addEventListener("click", (e) => this.resetClicked(e));
     this.checkInput();
@@ -54,20 +67,49 @@ class Ask {
     }
     this.charCounter.textContent = `${charsRemaining} characters remaining`;
   }
+
+  //create functions for each example button
+
     setExample(event) {
-        event.preventDefault()
-        console.log('setting example')
-        this.askInput.value =
-            'Full of energy, bouncing off the walls'
-        this.checkInput()
+        event.preventDefault();
+        let buttonClicked = event.target;
+        if (buttonClicked === this.button1) {
+            this.resetResults()
+            this.askInput.value = 'so happy, smiling bigger than the cheshire cat'
+            this.askButton.click()
+            
+        }
+        if (buttonClicked === this.button2) {
+            this.resetResults()
+            this.askInput.value = 'Grrrrrrrr let me break something'
+            this.askButton.click()
+        }
+        if (buttonClicked === this.button3) {
+            this.resetResults()
+            this.askInput.value = "Soooooo tired, can't keep my eyes open"
+            this.askButton.click()
+        }
+        if (buttonClicked === this.button4) {
+            this.resetResults()
+            this.askInput.value = "Wwwwooooooooo let's go, I'm bouncing off the walls"
+            this.askButton.click()
+        }
+        
+        ;
     }
+       
+        
   
 
     //reset results on search button click
 
     resetResults() {
-        this.resultsContainer.classList.remove('is-shown');
-        this.clearListButton.classList.add('hidden');
+        if (this.resultsList) {
+        this.resultsList.innerHTML = '';
+    }
+   
+    this.resultsContainer.classList.remove('is-shown');
+    this.clearListButton.classList.add('hidden');
     }
 
     resetClicked(event) {

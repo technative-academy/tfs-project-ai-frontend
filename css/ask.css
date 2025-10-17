@@ -12,10 +12,12 @@
 
 .ask__input-wrapper {
   position: relative;
+  display: flex;
+  flex-direction: row;
 }
 
 .ask__input {
-  width: 100%;
+  width: 80%;
   border: 1px solid var(--colour-background-light);
   border-radius: var(--border-radius-s);
   background: var(--colour-background-light);
@@ -24,18 +26,33 @@
   font-size: var(--font-size-body);
   font-family: var(--font-family-body);
   line-height: 1.5;
+  min-height: 10rem;
+}
+
+.suggestion__header {
+  text-align: center;
+  margin-bottom: 0.2rem;
+  margin-top: 0;
 }
 
 .ask__button-example {
-  position: absolute;
   z-index: 2;
-  right: var(--spacing-l);
+  right: 0;
   top: var(--spacing-l);
-  background: none;
-  border: none;
   cursor: pointer;
   opacity: 1;
   transition: opacity 0.25s;
+  padding: 0.3rem;
+  margin: 0.1rem;
+}
+
+.suggestion__buttons {
+  margin-left: 5%;
+  right: var(--spacing-l);
+  top: var(--spacing-l);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
 }
 
 .ask__button-example.is-hidden {
