@@ -39,6 +39,14 @@ class Shop {
       this.pageNumber++;
       this.search(e);
     });
+    this.searchSort.addEventListener("change", (e) => {
+      this.clearProducts();
+      this.search(e);
+    });
+    this.searchPageSize.addEventListener("change", (e) => {
+      this.clearProducts();
+      this.search(e);
+    });
     this.checkInput();
     this.search();
   }
