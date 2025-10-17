@@ -1,6 +1,6 @@
 import Spotify from "./spotify.js";
 
-console.log();
+console.log(Spotify.search('hello'));
 
 class Ask {
   maxLength = 160;
