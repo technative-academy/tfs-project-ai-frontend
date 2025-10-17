@@ -75,7 +75,7 @@ class Ask {
         let buttonClicked = event.target;
         if (buttonClicked === this.button1) {
             this.resetResults()
-            this.askInput.value = 'so happy, smiling bigger than the cheshire cat'
+            this.askInput.value = 'So happy, smiling bigger than the cheshire cat'
             this.askButton.click()
             
         }
