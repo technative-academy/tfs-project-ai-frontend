@@ -21,10 +21,9 @@
         </nav>
       </div>
       <div class="header__titles">
-        <h1 class="header__title">Ask the brains</h1>
+        <h1 class="header__title">Ask the DJI</h1>
         <p class="header__subtitle">
-          Post an open-ended question here and see some suggestions from our
-          specially trained AI...
+          Need inspiration? Get musical suggestions from our totally unique AI...
         </p>
       </div>
     </header>
@@ -37,7 +36,13 @@
             class="ask__input"
             placeholder="Enter your question here"
           ></textarea>
-          <button class="ask__button-example">Use an example</button>
+        <div class="suggestion__buttons">
+          <h4 class="suggestion__header">Quick Feels</h4>
+          <button class="ask__button-example button button__1 button--primary">Happy</button>
+          <button class="ask__button-example button button__2 button--primary">Angry</button>
+          <button class="ask__button-example button button__3 button--primary">Chilled</button>
+          <button class="ask__button-example button button__4 button--primary">Energetic</button>
+          </div>
         </div>
         <div class="ask__footer">
           <p class="ask__char-count"></p>
@@ -52,14 +57,14 @@
             </div>
           </div>
         </div>
-        <p class="ask__loading">Loading...</p>
+        <div class="search__loading"></div>
       </section>
       <section class="results">
         <h2 class="results__title">Results</h2>
         <div class="results__list"></div>
         <div class="results__show-more">
           <button class="button button--primary">Show more</button>
-          <p class="loading__more">Loading...</p>
+          <div class="search__loading loading__more"></div>
           <button class="button button--primary clear__button">Clear list</button>
         </div>
       </section>
