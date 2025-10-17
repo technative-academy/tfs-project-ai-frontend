@@ -12,17 +12,86 @@
 
 .header__content {
     max-width: var(--width-max);
-    display: flex;
-    flex-direction: column;
     margin: 0 auto;
-    justify-content: space-between;
-    align-items: center;
     padding: var(--spacing-l);
 }
 
+/* mobile-specific styles */
+@media (max-width: 799px) {
+    .header__content {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* hide the full nav on mobile and show the hamburger */
+    /* .header__nav .nav-links {
+        display: none;
+    } this was the blunder that costed me like hours to figure out*/
+
+    /* keep nav visible so .ham-menu is clickable*/
+    .header__nav {
+        display: flex;
+        align-items: center;
+        gap: 0;
+    }
+
+    .ham-menu {
+        display: block;
+    }
+    /* adjust off-screen menu font size & style for mobile */
+    .off-screen-menu {
+        font-size: 1rem;
+        gap: 0.5rem; /* smaller text for mobile dropdown */
+    }
+}
+
+/* desktop-specific styles */
 @media (min-width: 800px) {
     .header__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header__nav {
+        position: relative;
+        margin-top: var(--spacing-xl);
+        padding-bottom: 5px;
+        margin-top: var(--spacing-xl);
+        /* width: 50%; full width for desktop nav */
+    }
+
+    /* SHOW the nav links on desktop */
+    .header__nav .nav-links {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: var(--spacing-l);
         flex-direction: row;
+        align-items: flex-end;
+        bottom: 5px; /* moves the menu links slightly above the line */
+        background: none;
+        height: auto;
+        width: auto;
+        font-size: 1rem;
+    }
+
+    /* Fix the off-screen menu background for desktop */
+    .off-screen-menu {
+        position: static;
+        background: none;
+        height: auto;
+        width: auto;
+        font-size: 1rem;
+        transition: none; /* optional: disable sliding animation on desktop */
+    }
+
+    .ham-menu {
+        display: none; /* Hide hamburger menu on desktop */
     }
 }
 
@@ -32,15 +101,16 @@
     border-bottom: 1px solid var(--colour-text-light);
     padding-bottom: 5px;
     display: flex;
+    align-items: center;
     gap: var(--spacing-l);
-    margin-top: var(--spacing-l);
+    margin-top: var(--spacing-xl);
 }
 
-@media (min-width: 800px) {
+/* @media (min-width: 800px) {
     .header__nav {
         margin-top: 0;
     }
-}
+} */
 
 .header__link {
     color: var(--colour-text-light);
@@ -81,4 +151,76 @@
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* hamburger menu */
+.off-screen-menu {
+    background-color: var(--colour-primary-dark);
+    height: 50vh;
+    width: 70%;
+    max-width: 250px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    transform: translateX(100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.off-screen-menu.active {
+    transform: translateX(0);
+}
+
+.ham-menu {
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+    position: relative;
+    z-index: 1001; /* ensure it's above off-screen menu element */
+}
+
+.ham-menu span {
+    height: 4px;
+    width: 70%;
+    background-color: var(--colour-text-light);
+    border-radius: 25px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: 0.3s ease;
+}
+
+/* Position the spans to create the hamburger icon */
+.ham-menu span:nth-child(1) {
+    top: 10px;
+}
+.ham-menu span:nth-child(2) {
+    top: 18px;
+}
+.ham-menu span:nth-child(3) {
+    top: 26px;
+}
+.ham-menu span:nth-child(4) {
+    top: 34px;
+}
+
+/* Rotate first and last span to make an X */
+.ham-menu.active span:nth-child(1) {
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.ham-menu.active span:nth-child(2) {
+    opacity: 0;
+}
+.ham-menu.active span:nth-child(3) {
+    opacity: 0;
+}
+.ham-menu.active span:nth-child(4) {
+    top: 50%;
+    transform: translate(-50%, 50%) rotate(-45deg);
 }
