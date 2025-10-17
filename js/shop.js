@@ -50,6 +50,7 @@ class Shop {
   async search(e) {
     if (e) e.preventDefault();
 
+    this.productsShowMore.classList.remove("products__show-more--active");
     this.loading.classList.add("is-loading");
     this.searchResultCount.textContent = "Loading...";
 
@@ -107,8 +108,6 @@ class Shop {
         product.description.toLowerCase().includes(searchTerm)
     );
 
-    this.productsContainer.classList.add("is-shown");
-
     filteredProducts.forEach((product) => {
       const productsItem = document.createElement("div");
       productsItem.classList.add("products__item");
@@ -153,7 +152,7 @@ class Shop {
   setShowMoreStatus(items) {
     const noResults = document.createElement("p");
     noResults.classList.add("products__no-results");
-    this.productsShowMore.style.display = "block";
+    this.productsShowMore.classList.add("products__show-more--active");
 
     if (items == this.searchPageSize.value) {
       return;
@@ -165,13 +164,13 @@ class Shop {
         noResults.textContent = "No more products found";
         this.productsContainer.appendChild(noResults);
       }
-      this.productsShowMore.style.display = "none";
+      this.productsShowMore.classList.remove("products__show-more--active");
     } else if (this.pageNumber > 1) {
       noResults.textContent = "No more products found";
       this.productsContainer.appendChild(noResults);
-      this.productsShowMore.style.display = "none";
+      this.productsShowMore.classList.remove("products__show-more--active");
     } else {
-      this.productsShowMore.style.display = "none";
+      this.productsShowMore.classList.remove("products__show-more--active");
       return;
     }
   }
