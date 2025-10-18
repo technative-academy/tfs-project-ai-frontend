@@ -1,6 +1,5 @@
 .search {
   padding: var(--spacing-xl) var(--spacing-l);
-  text-align: left;
 }
 
 .search__input-wrapper {
@@ -35,13 +34,17 @@
 .search__footer {
   margin-top: var(--spacing-l);
   display: flex;
+  gap: 1rem;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .search__result-count {
   font-size: var(--font-size-small);
   font-style: italic;
+  width: 100%;
+  margin: auto;
 }
 
 .search__loading {

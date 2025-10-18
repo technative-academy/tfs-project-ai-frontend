@@ -2,7 +2,7 @@
 
 let accessToken;
 const clientID = "5469abf229334a49a34f3ca365e3005f";
-const redirectUrl = "https://technative-academy.github.io/ask-beatz/";
+const redirectUrl = "https://technative-academy.github.io/ask-beatz/ask/";
 
 const Spotify = {
     getAccessToken() {

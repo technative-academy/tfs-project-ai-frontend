@@ -40,24 +40,27 @@
         </div>
         <div class="search__footer">
           <p class="search__result-count"></p>
-          <label for="sort">Sort By</label>
-          <select id="sort" class="search__sort">
-            <option value="title">Title (A-Z)</option>
-            <option value="price">Price (low to high)</option>
-            <option value="rating">Rating (high to low)</option>
-          </select>
-          <label for="page-size">Page Size</label>
-          <select id="page-size" class="search__page-size">
-            <option value="6">6</option>
-            <option value="12">12</option>
-            <option value="24">24</option>
-          </select>
+          <div>
+            <label for="sort">Sort By</label>
+            <select id="sort" class="search__sort">
+              <option value="title">Title (A-Z)</option>
+              <option value="price">Price (low to high)</option>
+              <option value="rating">Rating (high to low)</option>
+            </select>
+          </div>
+          <div>
+            <label for="page-size">Page Size</label>
+            <select id="page-size" class="search__page-size">
+              <option value="6">6</option>
+              <option value="12">12</option>
+              <option value="24">24</option>
+            </select>
+          </div>
         </div>
-        <p class="search__loading">Loading...</p>
       </section>
       <section class="products">
-        <h2 class="products__title">Products</h2>
         <div class="products__list"></div>
+        <div class="search__loading"></div>
         <div class="products__show-more">
           <button class="button button--primary">Show more</button>
         </div>

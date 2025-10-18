@@ -10,9 +10,10 @@ class Shop {
       this.searchSort = this.searchContainer.querySelector(".search__sort");
       this.searchPageSize =
         this.searchContainer.querySelector(".search__page-size");
-      this.loading = this.searchContainer.querySelector(".search__loading");
+      
 
       this.productsContainer = document.querySelector(".products");
+      this.loading = this.productsContainer.querySelector(".search__loading");
       this.productsList =
         this.productsContainer.querySelector(".products__list");
       this.productsShowMore = this.productsContainer.querySelector(
@@ -38,6 +39,14 @@ class Shop {
       this.pageNumber++;
       this.search(e);
     });
+    this.searchSort.addEventListener("change", (e) => {
+      this.clearProducts();
+      this.search(e);
+    });
+    this.searchPageSize.addEventListener("change", (e) => {
+      this.clearProducts();
+      this.search(e);
+    });
     this.checkInput();
     this.search();
   }
@@ -49,9 +58,9 @@ class Shop {
   async search(e) {
     if (e) e.preventDefault();
 
+    this.productsShowMore.classList.remove("products__show-more--active");
     this.loading.classList.add("is-loading");
-    // this.productsContainer.classList.remove("is-shown");
-    this.searchResultCount.textContent = "";
+    this.searchResultCount.textContent = "Loading...";
 
     let searchURL = await this.buildSearchURL();
 
@@ -107,8 +116,6 @@ class Shop {
         product.description.toLowerCase().includes(searchTerm)
     );
 
-    this.productsContainer.classList.add("is-shown");
-
     filteredProducts.forEach((product) => {
       const productsItem = document.createElement("div");
       productsItem.classList.add("products__item");
@@ -116,7 +123,7 @@ class Shop {
 
       const productsItemImage = document.createElement("img");
       productsItemImage.classList.add("products__item-image");
-      productsItemImage.src = product.img;
+      productsItemImage.src = "https://ai-project.technative.dev.f90.co.uk" + product.image;
       productsItem.appendChild(productsItemImage);
 
       const productsItemTitle = document.createElement("h3");
@@ -152,25 +159,26 @@ class Shop {
 
   setShowMoreStatus(items) {
     const noResults = document.createElement("p");
-    this.productsShowMore.style.display = "block";
+    noResults.classList.add("products__no-results");
+    this.productsShowMore.classList.add("products__show-more--active");
 
     if (items == this.searchPageSize.value) {
       return;
     } else if (items == 0) {
       if (this.productsList.childElementCount === 0) {
         noResults.textContent = "No products found";
-        this.productsList.appendChild(noResults);
+        this.productsContainer.appendChild(noResults);
       } else {
         noResults.textContent = "No more products found";
-        this.productsList.appendChild(noResults);
+        this.productsContainer.appendChild(noResults);
       }
-      this.productsShowMore.style.display = "none";
+      this.productsShowMore.classList.remove("products__show-more--active");
     } else if (this.pageNumber > 1) {
       noResults.textContent = "No more products found";
       this.productsContainer.appendChild(noResults);
-      this.productsShowMore.style.display = "none";
+      this.productsShowMore.classList.remove("products__show-more--active");
     } else {
-      this.productsShowMore.style.display = "none";
+      this.productsShowMore.classList.remove("products__show-more--active");
       return;
     }
   }
