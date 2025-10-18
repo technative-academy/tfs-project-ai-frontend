@@ -10,7 +10,6 @@ class Shop {
       this.searchSort = this.searchContainer.querySelector(".search__sort");
       this.searchPageSize =
         this.searchContainer.querySelector(".search__page-size");
-      
 
       this.productsContainer = document.querySelector(".products");
       this.loading = this.productsContainer.querySelector(".search__loading");
@@ -30,7 +29,6 @@ class Shop {
 
   init() {
     if (!this.searchContainer) return;
-    this.searchInput.addEventListener("input", (e) => this.checkInput(e));
     this.searchButton.addEventListener("click", (e) => {
       this.clearProducts();
       this.search(e);
@@ -47,12 +45,7 @@ class Shop {
       this.clearProducts();
       this.search(e);
     });
-    this.checkInput();
     this.search();
-  }
-
-  checkInput() {
-    this.searchButton.disabled = this.searchInput.value.length === 0;
   }
 
   async search(e) {
@@ -109,21 +102,17 @@ class Shop {
   }
 
   processProducts(data) {
-    const searchTerm = this.searchInput.value.toLowerCase();
-    const filteredProducts = data.products.filter(
-      (product) =>
-        product.title.toLowerCase().includes(searchTerm) ||
-        product.description.toLowerCase().includes(searchTerm)
-    );
+    const productsList = data.products;
 
-    filteredProducts.forEach((product) => {
+    productsList.forEach((product) => {
       const productsItem = document.createElement("div");
       productsItem.classList.add("products__item");
       this.productsList.appendChild(productsItem);
 
       const productsItemImage = document.createElement("img");
       productsItemImage.classList.add("products__item-image");
-      productsItemImage.src = "https://ai-project.technative.dev.f90.co.uk" + product.image;
+      productsItemImage.src =
+        "https://ai-project.technative.dev.f90.co.uk" + product.image;
       productsItem.appendChild(productsItemImage);
 
       const productsItemTitle = document.createElement("h3");
