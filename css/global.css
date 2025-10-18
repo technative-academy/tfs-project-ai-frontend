@@ -5,10 +5,10 @@
   --colour-primary: #7f2fee;
   --colour-secondary: #ff0080;
   --colour-background-white: white;
-  --colour-background-light: #E7E7E7;
-  --colour-background-dark: #7D7D7D;
+  --colour-background-light: #e7e7e7;
+  --colour-background-dark: #7d7d7d;
   --colour-text-light: #ffffff;
-  --colour-text-dark: #1B1C22;
+  --colour-text-dark: #1b1c22;
 
   --width-max: 800px;
 
@@ -96,14 +96,15 @@ p {
 }
 
 @media (min-width: 1024px) {
-    h1 {
-        font-size: 56px;
-        line-height: 64px;
-    }
+  h1 {
+    font-size: 56px;
+    line-height: 64px;
+  }
 }
 
 /* Loading Spinner */
 .search__loading {
+  display: none;
   width: 50px;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -112,4 +113,12 @@ p {
   animation: l1 1s infinite;
   margin: 2rem auto;
 }
-@keyframes l1 {to{transform: rotate(.5turn)}}
+@keyframes l1 {
+  to {
+    transform: rotate(0.5turn);
+  }
+}
+
+.search__loading.is-loading {
+  display: block;
+}

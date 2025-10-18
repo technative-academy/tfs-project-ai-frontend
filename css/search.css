@@ -46,10 +46,4 @@
   margin: auto;
 }
 
-.search__loading {
-  display: none;
-}
 
-.search__loading.is-loading {
-  display: block;
-}
