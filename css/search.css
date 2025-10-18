@@ -8,7 +8,7 @@
   gap: var(--spacing-l);
 }
 
-@media (min-width: 800px) {
+@media (min-width: 768px) {
   .search__input-wrapper {
     flex-direction: row;
   }
@@ -41,16 +41,9 @@
 }
 
 .search__result-count {
-  font-size: var(--font-size-small);
   font-style: italic;
   width: 100%;
   margin: auto;
 }
 
-.search__loading {
-  display: none;
-}
 
-.search__loading.is-loading {
-  display: block;
-}
