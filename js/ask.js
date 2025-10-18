@@ -196,7 +196,7 @@ class Ask {
       resultsItemDescription.textContent = result.description;
       resultsItem.appendChild(resultsItemDescription);
 
-      Spotify.search(resultsItemDescription);
+      
     });
     
   }
