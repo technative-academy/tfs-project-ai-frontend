@@ -83,7 +83,6 @@
 }
 
 .ask__char-count {
-  font-size: var(--font-size-small);
   font-style: italic;
 }
 

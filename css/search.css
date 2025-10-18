@@ -41,7 +41,6 @@
 }
 
 .search__result-count {
-  font-size: var(--font-size-small);
   font-style: italic;
   width: 100%;
   margin: auto;
