@@ -8,7 +8,7 @@
   gap: var(--spacing-l);
 }
 
-@media (min-width: 800px) {
+@media (min-width: 768px) {
   .search__input-wrapper {
     flex-direction: row;
   }

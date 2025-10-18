@@ -20,7 +20,7 @@
   padding: var(--spacing-l);
 }
 
-@media (min-width: 800px) {
+@media (min-width: 768px) {
   .header__content {
     flex-direction: row;
   }
@@ -36,7 +36,7 @@
   margin-top: var(--spacing-l);
 }
 
-@media (min-width: 800px) {
+@media (min-width: 768px) {
   .header__nav {
     margin-top: 0;
   }
