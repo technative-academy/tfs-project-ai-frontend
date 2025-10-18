@@ -1,6 +1,5 @@
 import Spotify from "./spotify.js";
 
-
 class Ask {
   maxLength = 160;
 
@@ -42,6 +41,7 @@ class Ask {
     this.checkInput();
     this.showMoreButton.addEventListener("click", (e) => this.showMore(e));
     this.clearListButton.addEventListener("click", (e) => this.resetResults(e));
+    this.clearListButton.addEventListener("click", (e) => this.clearInput(e));
     this.askButton.addEventListener("click", (e) => this.resetResults(e));
     this.askInput.addEventListener("keypress", (e) => this.onEnter(e));
   }
@@ -59,6 +59,13 @@ class Ask {
     this.charCounter.textContent = `${charsRemaining} characters remaining`;
   }
 
+  //clear input
+
+  clearInput() {
+    this.askInput.value = "";
+  }
+
+
   //create functions for each example button
 
   setExample(event) {
@@ -70,8 +77,8 @@ class Ask {
       this.askButton.click();
       this.button1.classList.add("button--secondary");
       this.button2.classList.remove("button--secondary");
-      this.button3.classList.remove('button--secondary')
-      this.button4.classList.remove('button--secondary')
+      this.button3.classList.remove("button--secondary");
+      this.button4.classList.remove("button--secondary");
     }
     if (buttonClicked === this.button2) {
       this.resetResults();
@@ -79,8 +86,8 @@ class Ask {
       this.askButton.click();
       this.button2.classList.add("button--secondary");
       this.button1.classList.remove("button--secondary");
-      this.button3.classList.remove('button--secondary')
-      this.button4.classList.remove('button--secondary')
+      this.button3.classList.remove("button--secondary");
+      this.button4.classList.remove("button--secondary");
     }
 
     if (buttonClicked === this.button3) {
@@ -89,8 +96,8 @@ class Ask {
       this.askButton.click();
       this.button3.classList.add("button--secondary");
       this.button2.classList.remove("button--secondary");
-      this.button1.classList.remove('button--secondary')
-      this.button4.classList.remove('button--secondary')
+      this.button1.classList.remove("button--secondary");
+      this.button4.classList.remove("button--secondary");
     }
 
     if (buttonClicked === this.button4) {
@@ -100,8 +107,8 @@ class Ask {
       this.askButton.click();
       this.button4.classList.add("button--secondary");
       this.button2.classList.remove("button--secondary");
-      this.button3.classList.remove('button--secondary')
-      this.button1.classList.remove('button--secondary')
+      this.button3.classList.remove("button--secondary");
+      this.button1.classList.remove("button--secondary");
     }
   }
 
@@ -110,6 +117,10 @@ class Ask {
   resetResults() {
     if (this.resultsList) {
       this.resultsList.innerHTML = "";
+      this.button1.classList.remove("button--secondary");
+      this.button2.classList.remove("button--secondary");
+      this.button3.classList.remove("button--secondary");
+      this.button4.classList.remove("button--secondary");
     }
 
     this.resultsContainer.classList.remove("is-shown");
