@@ -81,6 +81,11 @@
   box-shadow: var(--box-shadow);
 }
 
+.main__button:hover {
+  background-color: var(--colour-background-white);
+  color: var(--colour-primary);
+}
+
 @media (min-width: 1200px) {
   .main__button {
     padding: var(--padding-xxl);
