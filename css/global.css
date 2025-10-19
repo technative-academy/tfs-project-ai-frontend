@@ -20,6 +20,13 @@
   --spacing-xl: 40px;
   --spacing-xxl: 80px;
 
+  --padding-xs: 4px 8px;
+  --padding-s: 8px 12px;
+  --padding-m: 12px 20px;
+  --padding-l: 16px 32px;
+  --padding-xl: 20px 40px;
+  --padding-xxl: 24px 48px;
+
   --font-size-heading: 48px;
   --font-size-subheading: 24px;
   --font-size-body: 16px;
@@ -30,6 +37,20 @@
   --border-radius-s: 5px;
   --border-radius-m: 10px;
   --border-radius-l: 20px;
+
+  --image-height-xs: 80px;
+  --image-height-s: 120px;
+  --image-height-m: 150px;
+  --image-height-l: 200px;
+  --image-height-xl: 250px;
+  --image-height-xxl: 300px;
+
+  --image-width-xs: 100px;
+  --image-width-s: 150px;
+  --image-width-m: 200px;
+  --image-width-l: 250px;
+  --image-width-xl: 300px;
+  --image-width-full: 100%;
 
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
