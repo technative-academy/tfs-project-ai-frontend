@@ -35,9 +35,9 @@
         <p class="header__subtitle">Who We Are and What We Do</p>
       </div>
     </header>
-    <main class="about">
-      <section class="about">
-        <div class="about">
+    <main>
+      <section class="about-block">
+        <div class="about-block__buttons">
           <button
             class="about__button currently-selected-tab"
             data-tab="first-tab"
@@ -48,28 +48,48 @@
             About The Team
           </button>
         </div>
-        <div class="about__content currently-selected-tab" data-tab="first-tab">
-          <p>
-            Ask Beatz is a platform that allows you to ask questions about music
-            and get answers from our AI. It is a platform that allows you to ask
-            questions about music and get answers from our AI. It is a platform
-            that allows you to ask questions about music and get answers from
-            our AI. It is a platform that allows you to ask questions about
-            music and get answers from our AI. It is a platform that allows you
-            to ask questions about music and get answers from our AI. It is a
-            platform that allows you to ask questions about music and get
-            answers from our AI.
-          </p>
-        </div>
-        <div class="about__content" data-tab="second-tab">
-          <p>
-            The team behind Ask Beatz is a group of music enthusiasts who are
-            passionate about helping people learn more about music. They are a
-            group of music enthusiasts who are passionate about helping people
-            learn more about music. They are a group of music enthusiasts who
-            are passionate about helping people learn more about music.
-          </p>
-        </div>
+        <article class="about-block__content">
+          <div
+            class="about__content currently-selected-tab"
+            data-tab-content="first-tab"
+          >
+            <div class="about__text">
+              <p>
+                Ask Beatz is a platform that allows you to ask questions about
+                music and get answers from our AI. It is a platform that allows
+                you to ask questions about music and get answers from our AI. It
+                is a platform that allows you to ask questions about music and
+                get answers from our AI. It is a platform that allows you to ask
+                questions about music and get answers from our AI. It is a
+                platform that allows you to ask questions about music and get
+                answers from our AI. It is a platform that allows you to ask
+                questions about music and get answers from our AI.
+              </p>
+            </div>
+          </div>
+
+          <div class="about__content" data-tab-content="second-tab">
+            <div class="about__text">
+              <p>
+                The team behind Ask Beatz is a group of music enthusiasts who
+                are passionate about helping people learn more about music. They
+                are a group of music enthusiasts who are passionate about
+                helping people learn more about music. They are a group of music
+                enthusiasts who are passionate about helping people learn more
+                about music.
+              </p>
+            </div>
+
+            <div class="about__image">
+              <img
+                src="../images/askz-beats.jpg"
+                alt="The Team"
+                class="about-block__image"
+              />
+              <p>The Team</p>
+            </div>
+          </div>
+        </article>
       </section>
     </main>
     <footer class="footer">
