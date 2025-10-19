@@ -50,7 +50,7 @@
   --image-width-m: 200px;
   --image-width-l: 250px;
   --image-width-xl: 300px;
-  --image-width-xxl: 100%;
+  --image-width-full: 100%;
 
   --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
