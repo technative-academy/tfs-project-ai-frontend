@@ -58,16 +58,16 @@
 }
 
 .main__image img {
-  width: var(--image-width-l);
-  height: 150px;
+  width: var(--image-width-xl);
+  height: var(--image-height-l);
   border-radius: var(--border-radius-m);
   box-shadow: var(--box-shadow);
 }
 
 @media (min-width: 1200px) {
   .main__image img {
-    width: var(--image-width-full);
-    height: auto;
+    width: var(--image-width-xxl);
+    height: var(--image-height-xl);
   }
 }
 
