@@ -7,8 +7,28 @@
   margin-right: auto;
   max-width: var(--width-max);
   padding: var(--spacing-l);
-}
-.footer__link {
-  text-decoration: none;
+  background-color: transparent;
 }
 
+
+
+.footer__links li a{
+  text-decoration: none;
+  color: var(--colour-text-light);
+  
+}
+
+.footer__links li a:hover{
+  text-decoration: none;
+  color: var(--colour-text-light);
+  text-decoration: underline;
+}
+
+
+.footer__link li::after {
+  color: var(--colour-text-light);
+}
+
+.footer__copyright {
+  color: var(--colour-text-light);
+}
