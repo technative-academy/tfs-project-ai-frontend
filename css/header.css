@@ -11,6 +11,7 @@
 }
 
 .header__content {
+  width: 60%;
   max-width: var(--width-max);
   display: flex;
   flex-direction: column;
@@ -23,6 +24,16 @@
 @media (min-width: 768px) {
   .header__content {
     flex-direction: row;
+  }
+
+
+}
+
+@media (max-width: 780px) {
+   .logo__image {
+    width: 10rem;
+    display: block;
+    box-sizing: border-box;
   }
 }
 
