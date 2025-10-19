@@ -13,11 +13,11 @@
   text-align: center;
 }
 
-.main_subtitle {
+.main__subtitle {
   color: var(--colour-primary);
 }
 
-.main_cards {
+.main__cards {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,7 +25,7 @@
 }
 
 @media (min-width: 1200px) {
-  .main_cards {
+  .main__cards {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -71,7 +71,7 @@
   }
 }
 
-.main_button {
+.main__button {
   background-color: var(--colour-primary);
   font-size: var(--font-size-body);
   color: var(--colour-text-light);
@@ -82,7 +82,7 @@
 }
 
 @media (min-width: 1200px) {
-  .main_button {
+  .main__button {
     padding: var(--padding-xxl);
     margin-bottom: var(--spacing-l);
   }
