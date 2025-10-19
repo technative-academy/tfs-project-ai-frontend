@@ -7,7 +7,34 @@
   margin-right: auto;
   max-width: var(--width-max);
   padding: var(--spacing-l);
+  color: var(--colour-text-grey);
 }
-.footer__link {
+.footer__link a{
   text-decoration: none;
+  transition: color 0.3s;
+  color: var(--colour-text-grey);
+}
+
+.footer__link a:hover {
+  color: var(--colour-text-dark);
+}
+
+.footer__link--long {
+  display: none;
+}
+
+.footer__links {
+  display: flex;
+  gap: var(--spacing-m);
+  list-style: none;
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .footer__link--short {
+    display: none;
+  }
+  .footer__link--long {
+    display: inline;
+  }
 }
