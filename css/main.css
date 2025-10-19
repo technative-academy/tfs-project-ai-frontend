@@ -74,15 +74,25 @@
 .main__button {
   background-color: var(--colour-primary);
   font-size: var(--font-size-body);
-  color: var(--colour-text-light);
+  color: var(--colour-background-white);
   padding: var(--padding-xl);
   border: none;
   border-radius: var(--border-radius-s);
   box-shadow: var(--box-shadow);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.main__button a {
+  color: var(--colour-background-white);
+  text-decoration: none;
 }
 
 .main__button:hover {
   background-color: var(--colour-background-white);
+}
+.main__button:hover a {
   color: var(--colour-primary);
 }
 
