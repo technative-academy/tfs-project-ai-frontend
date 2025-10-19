@@ -209,8 +209,20 @@ class Ask {
       resultsItemDescription.textContent = result.description;
       resultsItem.appendChild(resultsItemDescription);
 
-      
+        //add youtube link
+
+    const tubeLink = document.createElement("a");
+    const tubeLogo = document.createElement("img");
+    tubeLogo.src = "../images/youtube.png";
+    tubeLogo.classList.add("results__tube-logo")
+    tubeLink.classList.add("results__tube-link")
+    tubeLink.textContent = "listen here";
+    tubeLink.href = `https://www.youtube.com/results?search_query=${result.title}`;
+    tubeLink.target = "_blank"
+    resultsItem.appendChild(tubeLink);
+    tubeLink.appendChild(tubeLogo);
     });
+
     
   }
 }

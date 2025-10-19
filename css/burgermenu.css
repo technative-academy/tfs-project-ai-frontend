@@ -48,16 +48,14 @@
     }
 
     .header__nav.active {
-      
+        padding-bottom: 0;
         position: absolute;
-        right: 0;
         right: 15px;
         display: flex;
         border-bottom: 1px solid var(--primary-c);
         border-left: 1px solid var(--primary-c);
         width: 85px;
-        opacity: 1;
-        transition: 0.8s;
+        
     }
 
     .header__nav {
@@ -71,16 +69,13 @@
         text-align: center;
         background-color: var(--primary-tint-c);
         z-index: 100;
-        opacity: 0;
+       
         
     }
 
     .header__link {
-        
+        padding: 0;
     }
-  
-
-    
 }
 
 @media screen and (max-width: 780px) {

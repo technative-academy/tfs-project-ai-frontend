@@ -25,6 +25,16 @@
   border-radius: var(--border-radius-l);
 }
 
+.results__tube-link {
+  display: flex;
+  flex-direction: row;
+}
+
+.results__tube-logo {
+  width: 20px;
+  margin-left: 10px;
+}
+
 .results__show-more {
   margin-top: var(--spacing-l);
   padding: var(--spacing-l);
