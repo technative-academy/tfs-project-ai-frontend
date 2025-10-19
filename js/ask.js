@@ -1,6 +1,6 @@
 
 
-Spotify.search("hello")
+
 
 class Ask {
   maxLength = 160;
