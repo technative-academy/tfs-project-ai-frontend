@@ -16,7 +16,7 @@
 .header__content {
     max-width: var(--width-max);
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin: 0 auto;
     justify-content: space-between;
     align-items: center;
@@ -69,27 +69,37 @@
     opacity: 1;
 }
 
-.header__main {
+.header__base {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.header__logo img {
+.base__logo img {
+    display: none;
+}
+
+.nav__logo img {
+    display: initial;
     width: 100px;
     height: auto;
 }
 
 @media (min-width: 800px) {
-    .header__main {
+    .header__base {
         display: flex;
         flex-direction: row;
         justify-content: center;
     }
 
-    .header__logo img {
+    .base__logo img {
+        display: initial;
         width: 200px;
         height: auto;
+    }
+
+    .nav__logo img {
+        display: none;
     }
 }
 
