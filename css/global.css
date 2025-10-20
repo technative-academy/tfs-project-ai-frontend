@@ -1,12 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Rhodium+Libre&display=swap');
+
 /* Variables */
 :root {
-    --colour-primary: #6200ea;
+    --colour-primary: rgb(205, 171, 131);
     --colour-secondary: #ff0080;
+    --colour-gradient-1: rgba(215, 212, 186, 0.64);
+    --colour-gradient-2: rgba(205, 171, 131, 0.64);
     --colour-background-white: white;
     --colour-background-light: #f0f0f0;
     --colour-background-dark: black;
-    --colour-text-light: white;
-    --colour-text-dark: black;
+    --colour-text-light: #2b2d3d;
+    --colour-text-dark: #2b2d3d;
 
     --width-max: 800px;
 
@@ -29,6 +33,11 @@
     --border-radius-l: 20px;
 
     --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@font-face {
+    font-family: KyivTypeTitling;
+    src: url(../fonts/KyivTypeTitling-Black2.ttf);
 }
 
 *,
