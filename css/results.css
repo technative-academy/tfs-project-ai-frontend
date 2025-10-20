@@ -23,7 +23,7 @@
   padding: var(--spacing-l);
   border: 1px solid var(--colour-background-light);
   border-radius: var(--border-radius-l);
-  box-shadow: 0px 5px 5px var(  --colour-primary)
+  box-shadow: 0px 5px 5px #946fc9;
 }
 
 .results__item:hover {

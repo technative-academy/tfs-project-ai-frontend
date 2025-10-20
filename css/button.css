@@ -20,7 +20,7 @@
   border: 1px solid var(--colour-primary);
   background: var(--colour-primary);
   color: var(--colour-text-light);
-  box-shadow: 0px 3px 3px var(  --colour-secondary)
+  box-shadow: 0px 3px 3px #946fc9;
 }
 
 .button--primary:hover {
