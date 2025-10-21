@@ -128,7 +128,7 @@ class Shop {
             productsItemPrice.textContent = product.price
             productsItem.appendChild(productsItemPrice)
         })
-        this.hideContentManager.hideContent()
+        this.hideContentManager.createButton()
     }
 
     sortProducts() {
