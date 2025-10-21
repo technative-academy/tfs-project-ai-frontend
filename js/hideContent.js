@@ -20,7 +20,6 @@ class HideContent {
     }
 
     showContent() {
-        console.log(this.contentWrapper.children)
         Array.from(this.contentWrapper.children).forEach((element) => {
             element.classList.remove('products__hidden-item')
         })
