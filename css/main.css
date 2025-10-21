@@ -8,3 +8,8 @@
     border-radius: var(--border-radius-l);
     box-shadow: var(--box-shadow);
 }
+
+.main h2,
+.main h3 {
+    font-family: KyivTypeHeading;
+}
