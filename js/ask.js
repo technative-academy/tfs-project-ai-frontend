@@ -73,6 +73,26 @@ class Ask {
       return;
     }
     console.log("User asked: " + userInput);
+    // ---------- ADD IMAGE FETCH HERE ----------
+    try {
+      const imgRes = await fetch("http://localhost:3000/api/images");
+      const imgData = await imgRes.json();
+
+      const imgContainer = this.resultsContainer.querySelector(".results__images");
+      imgContainer.innerHTML = ""; // clear previous image
+
+      const img = document.createElement("img");
+      img.src = imgData.imageUrl;
+      img.alt = "Black and white artistic photo";
+      imgContainer.appendChild(img);
+
+      const caption = document.createElement("p");
+      caption.textContent = `Photo by ${imgData.photographer}`;
+      imgContainer.appendChild(caption);
+    } catch (imgError) {
+      console.error("Failed to fetch image:", imgError);
+    }
+    // ---------- IMAGE FETCH END ----------
 
     //Create AI prompt from user input
     const prompt = `Based on the words "${userInput}", describe the user's personality type in a fun and insightful way.`;
