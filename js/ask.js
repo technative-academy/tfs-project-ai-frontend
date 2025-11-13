@@ -66,7 +66,9 @@ class Ask {
     event.preventDefault();
     this.loading.classList.add("is-loading");
 
-    const url = "../js/fake-results.json";
+  
+    //This is where we fetch our data!!
+    const url = "https://ai-project.technative.dev.f90.co.uk/ai/visisoul/?query=tell+me+a+joke";
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -77,11 +79,14 @@ class Ask {
       // const json = await response.json();
       // this.processResults(json);
 
-      await setTimeout(async () => {
-        const json = await response.json();
-        this.processResults(json);
-        this.loading.classList.remove("is-loading");
-      }, 1000);
+      //Sleep helper function
+      const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+      const json = await response.json();
+      await sleep(1000);
+      this.processResults(json);
+      this.loading.classList.remove("is-loading");
+      
     } catch (error) {
       console.error(error.message);
       this.loading.classList.remove("is-loading");
@@ -94,24 +99,33 @@ class Ask {
     } else {
       this.resultsContainer.classList.remove("is-shown");
     }
+    
+    console.log(data);
 
-    data.forEach((result) => {
+    this.resultsList.innerHTML = "";
+
+    data.results.forEach((result) => {
       const resultsItem = document.createElement("div");
       resultsItem.classList.add("results__item");
-      this.resultsList.appendChild(resultsItem);
-
+      
       const resultsItemTitle = document.createElement("h3");
       resultsItemTitle.classList.add("results__item-title");
       resultsItemTitle.textContent = result.title;
-      resultsItem.appendChild(resultsItemTitle);
 
       const resultsItemDescription = document.createElement("p");
       resultsItemDescription.classList.add("results__item-description");
       resultsItemDescription.textContent = result.description;
+      
+      resultsItem.appendChild(resultsItemTitle);
       resultsItem.appendChild(resultsItemDescription);
+
+      this.resultsList.appendChild(resultsItem);
+
+      console.log(this.resultsList);
     });
   }
 }
+
 
 // Expose an instance of the 'Ask' class
 export default new Ask();
