@@ -65,10 +65,23 @@ class Ask {
   async askClicked(event) {
     event.preventDefault();
     this.loading.classList.add("is-loading");
+    //Get user input
+    const userInput = this.askInput.value.trim();
+    if (!userInput) {
+      alert("Please enter three words first!");
+      this.loading.classList.remove("is-loading");
+      return;
+    }
+    console.log("User asked: " + userInput);
 
-  
+    //Create AI prompt from user input
+    const prompt = `Based on the words "${userInput}", describe the user's personality type in a fun and insightful way.`;
+    
+    //Encode prompt for URL
+    const query = encodeURIComponent(prompt);
+
     //This is where we fetch our data!!
-    const url = "https://ai-project.technative.dev.f90.co.uk/ai/visisoul/?query=tell+me+a+joke";
+    const url = `https://ai-project.technative.dev.f90.co.uk/ai/visisoul/?query=${query}`;
     try {
       const response = await fetch(url);
       if (!response.ok) {
