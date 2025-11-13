@@ -6,10 +6,12 @@
     var(--colour-secondary)
   );
   color: var(--colour-text-light);
-  padding-top: var(--spacing-xl);
+  height: 350px;    
   padding-bottom: var(--spacing-xxl);
 }
-
+.header__logo img {
+  max-height: 200px;
+}
 .header__content {
   max-width: var(--width-max);
   display: flex;

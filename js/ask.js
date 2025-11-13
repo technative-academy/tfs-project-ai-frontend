@@ -5,9 +5,7 @@ class Ask {
     this.askContainer = document.querySelector(".ask");
     if (this.askContainer) {
       this.askInput = this.askContainer.querySelector(".ask__input");
-      this.exampleButton = this.askContainer.querySelector(
-        ".ask__button-example"
-      );
+      this.exampleButton = this.askContainer.querySelector(".ask__button-example");
       this.askButton = this.askContainer.querySelector(".ask__button-ask");
       this.resetButton = this.askContainer.querySelector(".ask__button-reset");
       this.charCounter = this.askContainer.querySelector(".ask__char-count");
@@ -28,7 +26,6 @@ class Ask {
   }
 
   checkInput() {
-    // check submission validity
     const charsRemaining = this.maxLength - this.askInput.value.length;
     if (charsRemaining < 0) {
       this.askButton.disabled = true;
@@ -39,7 +36,6 @@ class Ask {
     }
     this.charCounter.textContent = `${charsRemaining} characters remaining`;
 
-    // check whether to display example button
     if (this.askInput.value.length === 0) {
       this.askButton.disabled = true;
       this.exampleButton.classList.remove("is-hidden");
@@ -50,9 +46,7 @@ class Ask {
 
   setExample(event) {
     event.preventDefault();
-    console.log("setting example");
-    this.askInput.value =
-      "Tell me about some of the best things I could see with a telescope from Brighton (assuming it ever stops raining)";
+    this.askInput.value = "Chocolate cake";
     this.checkInput();
   }
 
@@ -66,52 +60,88 @@ class Ask {
     event.preventDefault();
     this.loading.classList.add("is-loading");
 
-    const url = "../js/fake-results.json";
+    const query = this.askInput.value.trim();
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(query)}`;
+
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
 
-      // fake a one second wait, use the two lines below for an instant response
-      // const json = await response.json();
-      // this.processResults(json);
-
-      await setTimeout(async () => {
-        const json = await response.json();
-        this.processResults(json);
-        this.loading.classList.remove("is-loading");
-      }, 1000);
+      const json = await response.json();
+      this.processResults(json.meals || []);
+      this.loading.classList.remove("is-loading");
     } catch (error) {
       console.error(error.message);
       this.loading.classList.remove("is-loading");
     }
   }
 
-  processResults(data) {
-    if (data.length > 0) {
+  processResults(meals) {
+    this.resultsList.innerHTML = ""; // clear old results
+
+    if (meals.length > 0) {
       this.resultsContainer.classList.add("is-shown");
     } else {
       this.resultsContainer.classList.remove("is-shown");
+      this.resultsList.innerHTML = "<p>No recipes found. Try another cake name!</p>";
+      return;
     }
 
-    data.forEach((result) => {
+    meals.forEach((meal) => {
       const resultsItem = document.createElement("div");
       resultsItem.classList.add("results__item");
+
+      resultsItem.innerHTML = `
+        <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+        <h3 class="results__item-title">${meal.strMeal}</h3>
+        <p class="results__item-description"><strong>Category:</strong> ${meal.strCategory}</p>
+        <p class="results__item-description"><strong>Instructions:</strong> ${meal.strInstructions.substring(0, 120)}...</p>
+      `;
+
       this.resultsList.appendChild(resultsItem);
-
-      const resultsItemTitle = document.createElement("h3");
-      resultsItemTitle.classList.add("results__item-title");
-      resultsItemTitle.textContent = result.title;
-      resultsItem.appendChild(resultsItemTitle);
-
-      const resultsItemDescription = document.createElement("p");
-      resultsItemDescription.classList.add("results__item-description");
-      resultsItemDescription.textContent = result.description;
-      resultsItem.appendChild(resultsItemDescription);
     });
   }
 }
 
 // Expose an instance of the 'Ask' class
-export default new Ask();
+const askInstance = new Ask();
+askInstance.init();
+
+// Separate search button for cakes
+document.getElementById("searchBtn").addEventListener("click", getRecipes);
+
+async function getRecipes() {
+  const query = document.getElementById("cakeInput").value.trim();
+  const recipesContainer = document.getElementById("recipes");
+  recipesContainer.innerHTML = "<p>Loading recipes...</p>";
+
+  try {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${encodeURIComponent(query)}`);
+    const data = await response.json();
+
+    recipesContainer.innerHTML = "";
+
+    if (data.meals) {
+      data.meals.forEach(meal => {
+        const card = document.createElement("div");
+        card.className = "recipe-card";
+
+        card.innerHTML = `
+          <img src="${meal.strMealThumb}" alt="${meal.strMeal}">
+          <h3>${meal.strMeal}</h3>
+          <p><strong>Category:</strong> ${meal.strCategory}</p>
+          <p><strong>Instructions:</strong> ${meal.strInstructions.substring(0, 120)}...</p>
+        `;
+
+        recipesContainer.appendChild(card);
+      });
+    } else {
+      recipesContainer.innerHTML = "<p>No recipes found. Try another cake name!</p>";
+    }
+  } catch (error) {
+    recipesContainer.innerHTML = "<p>Something went wrong. Please try again later.</p>";
+    console.error(error);
+  }
+}
