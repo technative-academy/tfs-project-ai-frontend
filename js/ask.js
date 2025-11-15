@@ -1,7 +1,7 @@
 class Ask {
-  maxLength = 160;
-
+  
   constructor() {
+    this.maxLength = 160;
     this.askContainer = document.querySelector(".ask");
     if (this.askContainer) {
       this.askInput = this.askContainer.querySelector(".ask__input");
