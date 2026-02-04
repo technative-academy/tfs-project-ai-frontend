@@ -1,0 +1,25 @@
+:is(section, .section) {
+  gap: 1em;
+}
+
+.section__row {
+  display: flex;
+  flex-direction: row;
+
+  > * {
+    flex: 1;
+  }
+}
+
+.section__column {
+  display: flex;
+  flex-direction: column;
+}
+
+.section__content--centered {
+  margin: auto 0;
+}
+
+.section__content--left-text {
+  text-align: left;
+}

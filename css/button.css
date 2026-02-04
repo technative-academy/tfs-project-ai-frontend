@@ -9,6 +9,8 @@
   border-radius: var(--border-radius-s);
   cursor: pointer;
   transition: all 0.25s;
+
+  text-decoration: none;
 }
 
 .button:disabled {
@@ -35,4 +37,8 @@
 
 .button--secondary:hover {
   border-color: var(--colour-primary);
+}
+
+.section .button {
+  align-self: center;
 }
