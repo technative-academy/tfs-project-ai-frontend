@@ -20,7 +20,7 @@ class Shop {
     if (!this.searchContainer) return;
     this.searchInput.addEventListener("input", (e) => this.checkInput(e));
     this.searchButton.addEventListener("click", (e) => this.search(e));
-    this.searchSort.addEventListener("change", () => this.search());
+    this.searchSort.addEventListener("change", (_e) => this.sort());
 
     this.checkInput();
     this.search();
@@ -28,6 +28,39 @@ class Shop {
 
   checkInput() {
     this.searchButton.disabled = this.searchInput.value.length === 0;
+  }
+
+  async sort() {
+    let sortType = this.searchSort.value;
+    const elements = [...this.productsList.children];
+
+    if (sortType === "price-asc") {
+      elements.sort((a, b) => {
+        let a_price = parseFloat(a.querySelector(".products__item-price").textContent);
+        let b_price = parseFloat(b.querySelector(".products__item-price").textContent);
+
+        return a_price - b_price;
+      });
+    } else if (sortType === "price-desc") {
+      elements.sort((a, b) => {
+        let a_price = parseFloat(a.querySelector(".products__item-price").textContent);
+        let b_price = parseFloat(b.querySelector(".products__item-price").textContent);
+
+        return b_price - a_price;
+      });
+    }
+    else if (sortType === "alpha") {
+      elements.sort((a, b) => {
+        let a_name = a.querySelector(".products__item-title").textContent;
+        let b_name = b.querySelector(".products__item-title").textContent;
+
+        return a_name.localeCompare(b_name);
+      });
+    } else {
+      console.log("Error: unknown sort type");
+    }
+
+    elements.forEach(element => this.productsList.appendChild(element));
   }
 
   async search(e) {
@@ -49,11 +82,11 @@ class Shop {
         throw new Error(`Response status: ${response.status}`);
       }
 
-      await setTimeout(async () => {
-        const json = await response.json();
-        this.processProducts(json.products);
-        this.loading.classList.remove("is-loading");
-      }, 1000);
+      const json = await response.json();
+      this.processProducts(json.products);
+      this.loading.classList.remove("is-loading");
+
+      this.sort();
     } catch (error) {
       console.error(error.message);
       this.loading.classList.remove("is-loading");
