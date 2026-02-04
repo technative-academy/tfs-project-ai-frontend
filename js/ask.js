@@ -69,6 +69,7 @@ class Ask {
     // get the query
     this.askInput.value = this.askInput.value.trim().toLowerCase();
 
+    // format the query to fit the url
     const query = this.askInput.value.split(" ").join("+");
 
     const url = `https://ai-project.technative.dev.f90.co.uk/ai/video-games/?query=${query}`;
@@ -85,7 +86,7 @@ class Ask {
       await setTimeout(async () => {
         const json = await response.json();
         this.processResults(json);
-        console.log(json);
+        //console.log(json);
         this.loading.classList.remove("is-loading");
       }, 1000);
     } catch (error) {
@@ -95,13 +96,16 @@ class Ask {
   }
 
   processResults(data) {
-    if (data.length > 0) {
+    if (data.results.length > 0) {
       this.resultsContainer.classList.add("is-shown");
     } else {
       this.resultsContainer.classList.remove("is-shown");
     }
-    console.log(data);
-    data.forEach((result) => {
+
+    // clear previous results
+    this.resultsList.innerHTML = "";
+    //console.log(data);
+    data.results.forEach((result) => {
       const resultsItem = document.createElement("div");
       resultsItem.classList.add("results__item");
       this.resultsList.appendChild(resultsItem);
