@@ -8,6 +8,7 @@ class Shop {
         ".search__result-count"
       );
       this.loading = this.searchContainer.querySelector(".search__loading");
+      this.searchSort = this.searchContainer.querySelector(".search__sort"); //added the search sort
 
       this.productsContainer = document.querySelector(".products");
       this.productsList =
@@ -19,6 +20,8 @@ class Shop {
     if (!this.searchContainer) return;
     this.searchInput.addEventListener("input", (e) => this.checkInput(e));
     this.searchButton.addEventListener("click", (e) => this.search(e));
+    this.searchSort.addEventListener("change", () => this.search());
+
     this.checkInput();
     this.search();
   }
@@ -38,7 +41,8 @@ class Shop {
       this.productsList.removeChild(this.productsList.lastChild);
     }
 
-    const url = "../js/fake-products.json";
+    const url =
+      "https://ai-project.technative.dev.f90.co.uk/products/sandwich/";
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -47,7 +51,7 @@ class Shop {
 
       await setTimeout(async () => {
         const json = await response.json();
-        this.processProducts(json);
+        this.processProducts(json.products);
         this.loading.classList.remove("is-loading");
       }, 1000);
     } catch (error) {
@@ -79,7 +83,8 @@ class Shop {
 
       const productsItemImage = document.createElement("img");
       productsItemImage.classList.add("products__item-image");
-      productsItemImage.src = product.img;
+      productsItemImage.src = `https://ai-project.technative.dev.f90.co.uk${product.image}`;
+      productsItemImage.alt = product.title;
       productsItem.appendChild(productsItemImage);
 
       const productsItemTitle = document.createElement("h3");
