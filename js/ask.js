@@ -34,8 +34,8 @@ class Ask {
     this.checkInput();
   }
 
-  randomNum() {
-    return Math.random() * (0 - 10) + 10;
+  randomNum(floor, ceil) {
+    return Math.random() * (floor - ceil) + ceil;
   }
 
   checkInput() {
@@ -136,13 +136,13 @@ class Ask {
       const dataCentreTally = document.createElement("div");
       dataCentreTally.insertAdjacentHTML(
         "beforeend",
-        `<h3>Congratulations!</h3><p>Your incessant wastefulness has necessitated the construction of ${this.randomNum().toFixed(0)} data centres!</p>`
+        `<h3>Congratulations!</h3><p>Your incessant wastefulness has necessitated the construction of ${this.randomNum(2, 10).toFixed(0)} data centres!</p>`
       );
       this.resultsList.appendChild(dataCentreTally);
     }
 
     const treeTally = document.createElement("p");
-    treeTally.textContent = `${this.randomNum().toFixed(0)} trees burned in the making of this request!`;
+    treeTally.textContent = `${this.randomNum(2, 20).toFixed(0)} trees burned in the making of this request!`;
     this.resultsList.appendChild(treeTally);
   }
 }
