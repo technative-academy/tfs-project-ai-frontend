@@ -1,3 +1,5 @@
+import { fetchAiResults } from "./api.js";
+
 class Ask {
   maxLength = 160;
 
@@ -59,43 +61,55 @@ class Ask {
   resetClicked(event) {
     event.preventDefault();
     this.askInput.value = "";
+    if (this.resultsContainer) {
+      this.resultsContainer.classList.remove("is-shown");
+    }
+    if (this.resultsList) {
+      while (this.resultsList.firstChild) {
+        this.resultsList.removeChild(this.resultsList.lastChild);
+      }
+    }
     this.checkInput();
   }
 
   async askClicked(event) {
     event.preventDefault();
+    const query = this.askInput.value.trim();
+    if (!query) return;
+
     this.loading.classList.add("is-loading");
+    this.askButton.disabled = true;
 
-    const url = "../js/fake-results.json";
     try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-
-      // fake a one second wait, use the two lines below for an instant response
-      // const json = await response.json();
-      // this.processResults(json);
-
-      await setTimeout(async () => {
-        const json = await response.json();
-        this.processResults(json);
-        this.loading.classList.remove("is-loading");
-      }, 1000);
+      const results = await fetchAiResults({ query });
+      console.log("results", results);
+      this.processResults(results);
     } catch (error) {
       console.error(error.message);
+      if (this.resultsContainer) {
+        this.resultsContainer.classList.remove("is-shown");
+      }
+    } finally {
       this.loading.classList.remove("is-loading");
+      this.checkInput();
     }
   }
 
-  processResults(data) {
-    if (data.length > 0) {
+  processResults(results) {
+    if (!this.resultsContainer || !this.resultsList) return;
+
+    while (this.resultsList.firstChild) {
+      this.resultsList.removeChild(this.resultsList.lastChild);
+    }
+
+    if (Array.isArray(results) && results.length > 0) {
       this.resultsContainer.classList.add("is-shown");
     } else {
       this.resultsContainer.classList.remove("is-shown");
+      return;
     }
 
-    data.forEach((result) => {
+    results.forEach((result) => {
       const resultsItem = document.createElement("div");
       resultsItem.classList.add("results__item");
       this.resultsList.appendChild(resultsItem);
@@ -115,3 +129,4 @@ class Ask {
 
 // Expose an instance of the 'Ask' class
 export default new Ask();
+

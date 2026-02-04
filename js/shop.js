@@ -1,3 +1,5 @@
+import { AI_BASE_URL, fetchProducts } from "./api.js";
+
 class Shop {
   constructor() {
     this.searchContainer = document.querySelector(".search");
@@ -7,6 +9,7 @@ class Shop {
       this.searchResultCount = this.searchContainer.querySelector(
         ".search__result-count"
       );
+      this.sortSelect = this.searchContainer.querySelector(".search__sort");
       this.loading = this.searchContainer.querySelector(".search__loading");
 
       this.productsContainer = document.querySelector(".products");
@@ -19,6 +22,9 @@ class Shop {
     if (!this.searchContainer) return;
     this.searchInput.addEventListener("input", (e) => this.checkInput(e));
     this.searchButton.addEventListener("click", (e) => this.search(e));
+    if (this.sortSelect) {
+      this.sortSelect.addEventListener("change", () => this.search());
+    }
     this.checkInput();
     this.search();
   }
@@ -38,48 +44,121 @@ class Shop {
       this.productsList.removeChild(this.productsList.lastChild);
     }
 
-    const url = "../js/fake-products.json";
     try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-
-      await setTimeout(async () => {
-        const json = await response.json();
-        this.processProducts(json);
-        this.loading.classList.remove("is-loading");
-      }, 1000);
+      const query = this.buildQuery();
+      const sort = this.getSort();
+      const results = await fetchProducts({ query, sort });
+      console.log("results:", results);
+      const products = results.map((product, index) =>
+        this.mapProduct(product, index)
+      );
+      this.processProducts(products);
     } catch (error) {
       console.error(error.message);
+      this.searchResultCount.textContent = "0 products found";
+      this.productsContainer.classList.remove("is-shown");
+    } finally {
       this.loading.classList.remove("is-loading");
     }
   }
 
-  processProducts(data) {
-    const searchTerm = this.searchInput.value.toLowerCase();
-    const filteredProducts = data.filter(
-      (product) =>
-        product.title.toLowerCase().includes(searchTerm) ||
-        product.description.toLowerCase().includes(searchTerm)
-    );
+  buildQuery() {
+    const term = this.searchInput.value.trim();
+    if (term.length > 0) {
+      return term;
+    }
+    return "";
+  }
 
-    this.searchResultCount.textContent = `${filteredProducts.length} products found`;
+  getSort() {
+    if (!this.sortSelect) {
+      return "price";
+    }
+    const value = this.sortSelect.value.toLowerCase();
+    if (value.includes("price")) return "price";
+    if (value.includes("rating")) return "rating";
+    if (value.includes("title")) return "title";
+    return "price";
+  }
 
-    if (filteredProducts.length > 0) {
+  mapProduct(product, index) {
+    const title =
+      product && typeof product.title === "string" && product.title.length > 0
+        ? product.title
+        : `Product ${index + 1}`;
+    const description =
+      product &&
+      typeof product.description === "string" &&
+      product.description.length > 0
+        ? product.description
+        : "No description available.";
+
+    return {
+      image: this.resolveImageUrl(product?.image, title),
+      title,
+      description,
+      stars: this.normaliseStars(product?.stars),
+      price: this.formatPrice(product?.price),
+    };
+  }
+
+  resolveImageUrl(image, title) {
+    if (typeof image === "string" && image.trim().length > 0) {
+      try {
+        return new URL(image, AI_BASE_URL).toString();
+      } catch (error) {}
+    }
+    return this.buildPlaceholderImage(title);
+  }
+
+  buildPlaceholderImage(title) {
+    return `https://placehold.co/600x400/0b1f2a/f8f5e6?text=${encodeURIComponent(
+      title
+    )}`;
+  }
+
+  normaliseStars(stars) {
+    const numeric = Number(stars);
+    if (!Number.isFinite(numeric)) {
+      return 0;
+    }
+    const rounded = Math.round(numeric);
+    return Math.min(5, Math.max(1, rounded));
+  }
+
+  formatPrice(price) {
+    if (price === null || price === undefined) {
+      return "£0.00";
+    }
+    const numeric = Number(price);
+    if (Number.isFinite(numeric)) {
+      return `£${numeric.toFixed(2)}`;
+    }
+    if (typeof price === "string") {
+      return price.startsWith("£") ? price : `£${price}`;
+    }
+    return "£0.00";
+  }
+
+  processProducts(products) {
+    const items = Array.isArray(products) ? products : [];
+
+    this.searchResultCount.textContent = `${items.length} products found`;
+
+    if (items.length > 0) {
       this.productsContainer.classList.add("is-shown");
     } else {
       this.productsContainer.classList.remove("is-shown");
     }
 
-    filteredProducts.forEach((product) => {
+    items.forEach((product) => {
       const productsItem = document.createElement("div");
       productsItem.classList.add("products__item");
       this.productsList.appendChild(productsItem);
 
       const productsItemImage = document.createElement("img");
       productsItemImage.classList.add("products__item-image");
-      productsItemImage.src = product.img;
+      productsItemImage.src = product.image;
       productsItem.appendChild(productsItemImage);
 
       const productsItemTitle = document.createElement("h3");
