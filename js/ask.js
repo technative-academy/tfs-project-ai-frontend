@@ -66,22 +66,19 @@ class Ask {
     event.preventDefault();
     this.loading.classList.add("is-loading");
 
-    const url = "../js/fake-results.json";
+    const query = encodeURIComponent(this.askInput.value).replace("%20", "+");
+
+    const url = `https://ai-project.technative.dev.f90.co.uk/ai/sandwich/?query=${query}`;
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
 
-      // fake a one second wait, use the two lines below for an instant response
-      // const json = await response.json();
-      // this.processResults(json);
+      const json = await response.json();
+      this.processResults(json.results);
 
-      await setTimeout(async () => {
-        const json = await response.json();
-        this.processResults(json);
-        this.loading.classList.remove("is-loading");
-      }, 1000);
+      this.loading.classList.remove("is-loading");
     } catch (error) {
       console.error(error.message);
       this.loading.classList.remove("is-loading");
