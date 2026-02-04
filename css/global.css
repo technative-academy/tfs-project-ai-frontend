@@ -2,7 +2,7 @@
 :root {
   --colour-primary: #eac435ff;
   --colour-secondary: #ca1551ff;
-  --colour-background-white: #fb4d3dff;
+  --colour-background-white: white;
   --colour-background-light: #345995ff;
   --colour-background-dark: #03cea4ff;
   --colour-text-light: #edead0ff;
@@ -43,4 +43,22 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
+}
+
+.image--fill {
+  width: 100%;
+}
+
+hr {
+  height: 6px;
+  --c: var(--colour-text-dark);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--c),
+    var(--c) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+
+  border: 0;
 }
