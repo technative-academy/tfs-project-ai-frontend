@@ -9,6 +9,7 @@
   border-radius: var(--border-radius-s);
   cursor: pointer;
   transition: all 0.25s;
+  font-family: "Amatic SC", cursive;
 }
 
 .button:disabled {
