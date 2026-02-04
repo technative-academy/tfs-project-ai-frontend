@@ -26,6 +26,11 @@
   }
 }
 
+.header__logo img {
+  max-width: 75%;
+  border-radius: 2.5rem;
+}
+
 /* header nav */
 
 .header__nav {
