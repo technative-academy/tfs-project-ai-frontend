@@ -8,6 +8,7 @@ class Shop {
         ".search__result-count"
       );
       this.loading = this.searchContainer.querySelector(".search__loading");
+      this.searchSort = this.searchContainer.querySelector(".search__sort"); //added the search sort
 
       this.productsContainer = document.querySelector(".products");
       this.productsList =
@@ -19,12 +20,47 @@ class Shop {
     if (!this.searchContainer) return;
     this.searchInput.addEventListener("input", (e) => this.checkInput(e));
     this.searchButton.addEventListener("click", (e) => this.search(e));
+    this.searchSort.addEventListener("change", (_e) => this.sort());
+
     this.checkInput();
     this.search();
   }
 
   checkInput() {
     this.searchButton.disabled = this.searchInput.value.length === 0;
+  }
+
+  async sort() {
+    let sortType = this.searchSort.value;
+    const elements = [...this.productsList.children];
+
+    if (sortType === "price-asc") {
+      elements.sort((a, b) => {
+        let a_price = parseFloat(a.querySelector(".products__item-price").textContent);
+        let b_price = parseFloat(b.querySelector(".products__item-price").textContent);
+
+        return a_price - b_price;
+      });
+    } else if (sortType === "price-desc") {
+      elements.sort((a, b) => {
+        let a_price = parseFloat(a.querySelector(".products__item-price").textContent);
+        let b_price = parseFloat(b.querySelector(".products__item-price").textContent);
+
+        return b_price - a_price;
+      });
+    }
+    else if (sortType === "alpha") {
+      elements.sort((a, b) => {
+        let a_name = a.querySelector(".products__item-title").textContent;
+        let b_name = b.querySelector(".products__item-title").textContent;
+
+        return a_name.localeCompare(b_name);
+      });
+    } else {
+      console.log("Error: unknown sort type");
+    }
+
+    elements.forEach(element => this.productsList.appendChild(element));
   }
 
   async search(e) {
@@ -38,18 +74,19 @@ class Shop {
       this.productsList.removeChild(this.productsList.lastChild);
     }
 
-    const url = "../js/fake-products.json";
+    const url =
+      "https://ai-project.technative.dev.f90.co.uk/products/sandwich/";
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
 
-      await setTimeout(async () => {
-        const json = await response.json();
-        this.processProducts(json);
-        this.loading.classList.remove("is-loading");
-      }, 1000);
+      const json = await response.json();
+      this.processProducts(json.products);
+      this.loading.classList.remove("is-loading");
+
+      this.sort();
     } catch (error) {
       console.error(error.message);
       this.loading.classList.remove("is-loading");
@@ -79,7 +116,8 @@ class Shop {
 
       const productsItemImage = document.createElement("img");
       productsItemImage.classList.add("products__item-image");
-      productsItemImage.src = product.img;
+      productsItemImage.src = `https://ai-project.technative.dev.f90.co.uk${product.image}`;
+      productsItemImage.alt = product.title;
       productsItem.appendChild(productsItemImage);
 
       const productsItemTitle = document.createElement("h3");
