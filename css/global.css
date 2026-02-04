@@ -1,11 +1,11 @@
 /* Variables */
 :root {
-  --colour-primary: #6200ea;
-  --colour-secondary: #ff0080;
-  --colour-background-white: white;
-  --colour-background-light: #f0f0f0;
-  --colour-background-dark: black;
-  --colour-text-light: white;
+  --colour-primary: #eac435ff;
+  --colour-secondary: #ca1551ff;
+  --colour-background-white: #fb4d3dff;
+  --colour-background-light: #345995ff;
+  --colour-background-dark: #03cea4ff;
+  --colour-text-light: #edead0ff;
   --colour-text-dark: black;
 
   --width-max: 800px;
