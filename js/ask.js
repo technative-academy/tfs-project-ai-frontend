@@ -66,7 +66,12 @@ class Ask {
     event.preventDefault();
     this.loading.classList.add("is-loading");
 
-    const url = "../js/fake-results.json";
+    // get the query
+    this.askInput.value = this.askInput.value.trim().toLowerCase();
+
+    const query = this.askInput.value.split(" ").join("+");
+
+    const url = `https://ai-project.technative.dev.f90.co.uk/ai/video-games/?query=${query}`;
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -80,6 +85,7 @@ class Ask {
       await setTimeout(async () => {
         const json = await response.json();
         this.processResults(json);
+        console.log(json);
         this.loading.classList.remove("is-loading");
       }, 1000);
     } catch (error) {
@@ -94,7 +100,7 @@ class Ask {
     } else {
       this.resultsContainer.classList.remove("is-shown");
     }
-
+    console.log(data);
     data.forEach((result) => {
       const resultsItem = document.createElement("div");
       resultsItem.classList.add("results__item");
