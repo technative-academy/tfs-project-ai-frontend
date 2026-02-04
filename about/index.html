@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About | Table Guru</title>
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/about.css" />
     <script type="module" defer src="../js/script.js"></script>
+    <script type="module" defer src="../js/about.js"></script>
   </head>
   <body>
     <header class="header">
@@ -21,12 +23,64 @@
         </nav>
       </div>
       <div class="header__titles">
-        <h1 class="header__title">About the brains</h1>
-        <p class="header__subtitle">...</p>
+        <h1 class="header__title">About the Table Guru</h1>
+        <pre class="header__subtitle">Who we are , what we do,
+why we are , where we do</pre>
       </div>
     </header>
     <main class="main">
-      <p>...</p>
+      <div class="about-container">
+          <div class="tabs">
+            <button class="tab-btn active">About the app</button>
+            <button class="tab-btn ">About the team</button>
+          </div>
+          <div id="app" class="tab-content show">
+            <p>Let’s be honest: while our core technology is powered by advanced AI models (yes, ChatGPT’s sophisticated architecture), this application is far more than just a chatbot. It was born out of a common frustration shared by every board game enthusiast: The Rulebook Barrier. We’ve all been there—sitting around a table with friends, excitement in the air, only to have the momentum killed by a 50-page manual and a 20-minute debate over a specific card interaction. We built this app to be the "Digital Game Master" that every table deserves.</p>
+            
+            <br>
+            <p>What sets this application apart is its focus. While a standard AI can tell you who won the Super Bowl in 1994, our specialized implementation is fine-tuned to understand the intricate mechanics of hobby gaming. We have integrated specific logic to handle "Analysis Paralysis." By utilizing our custom-built API layer, the app doesn't just give you a text response; it interprets the "meta" of your game night. It understands the difference between a Eurogame worker-placement mechanic and a Deck-builder’s synergy, providing advice that is contextually relevant to your specific situation.</p>
+            <br>
+            <p>
+              <ul>
+                <li>
+                  The Instant Rule Consultant: Our AI acts as a real-time referee. By processing natural language queries, it can pinpoint specific rule clarifications in seconds, allowing you to keep the dice rolling without interruption.
+                </li>
+                <li>
+                  Smart Recommendation Engine: Through our "Products" integration, the app analyzes your preferences—complexity level, player count, and thematic interests—to suggest your next favorite game from our curated database.
+                </li>
+                <li>
+                    Tactical Deep-Dives: For competitive players, the AI can simulate strategic outcomes. Ask it for the optimal opening move in Terraforming Mars or the best counter-strategy in Twilight Imperium, and watch it break down the probabilities.
+                </li>
+              </ul>
+            </p>
+          
+          </div>
+          <div id="team" class="tab-content">
+            <div class="about-img-container">
+              <img src="../images/team.jpg" alt="TableGuru Team" class="team-img">
+            </div>
+            
+            <p>Section team Let’s be honest: while our core technology is powered by advanced AI models (yes, ChatGPT’s sophisticated architecture), this application is far more than just a chatbot. It was born out of a common frustration shared by every board game enthusiast: The Rulebook Barrier. We’ve all been there—sitting around a table with friends, excitement in the air, only to have the momentum killed by a 50-page manual and a 20-minute debate over a specific card interaction. We built this app to be the "Digital Game Master" that every table deserves.</p>
+            
+            <br>
+            <p>What sets this application apart is its focus. While a standard AI can tell you who won the Super Bowl in 1994, our specialized implementation is fine-tuned to understand the intricate mechanics of hobby gaming. We have integrated specific logic to handle "Analysis Paralysis." By utilizing our custom-built API layer, the app doesn't just give you a text response; it interprets the "meta" of your game night. It understands the difference between a Eurogame worker-placement mechanic and a Deck-builder’s synergy, providing advice that is contextually relevant to your specific situation.</p>
+            <br>
+            <p>
+              <ul>
+                <li>
+                  The Instant Rule Consultant: Our AI acts as a real-time referee. By processing natural language queries, it can pinpoint specific rule clarifications in seconds, allowing you to keep the dice rolling without interruption.
+                </li>
+                <li>
+                  Smart Recommendation Engine: Through our "Products" integration, the app analyzes your preferences—complexity level, player count, and thematic interests—to suggest your next favorite game from our curated database.
+                </li>
+                <li>
+                    Tactical Deep-Dives: For competitive players, the AI can simulate strategic outcomes. Ask it for the optimal opening move in Terraforming Mars or the best counter-strategy in Twilight Imperium, and watch it break down the probabilities.
+                </li>
+              </ul>
+            </p>
+          
+          </div>
+      </div>
     </main>
     <footer class="footer">
       <p class="footer__links">
