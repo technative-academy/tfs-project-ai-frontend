@@ -69,6 +69,7 @@ class Ask {
     // get the query
     this.askInput.value = this.askInput.value.trim().toLowerCase();
 
+    // format the query to fit the url
     const query = this.askInput.value.split(" ").join("+");
 
     const url = `https://ai-project.technative.dev.f90.co.uk/ai/video-games/?query=${query}`;
