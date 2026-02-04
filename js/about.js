@@ -1,3 +1,16 @@
+
+
+//It is not about "about" section. This code block just for changing footer's date.
+const thisYear = new Date();
+const footerDate = document.querySelector(".footer__copyright");
+console.log(footerDate);
+
+footerDate.textContent = "\u00A9 " + thisYear.getFullYear();
+
+
+
+
+
 const myAboutElements = document.querySelectorAll(".tab-btn");
 const selectableSection = document.querySelectorAll(".tab-content");
 const teamSection = document.querySelector("#team");
