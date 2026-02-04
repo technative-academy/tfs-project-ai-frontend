@@ -1,5 +1,6 @@
 class Ask {
   maxLength = 160;
+  useCounter = 0;
 
   constructor() {
     this.askContainer = document.querySelector(".ask");
@@ -13,6 +14,8 @@ class Ask {
       this.charCounter = this.askContainer.querySelector(".ask__char-count");
       this.loading = this.askContainer.querySelector(".ask__loading");
 
+      this.showMoreButton = document.querySelector(".showmore__button");
+
       this.resultsContainer = document.querySelector(".results");
       this.resultsList = this.resultsContainer.querySelector(".results__list");
     }
@@ -24,7 +27,15 @@ class Ask {
     this.exampleButton.addEventListener("click", (e) => this.setExample(e));
     this.askButton.addEventListener("click", (e) => this.askClicked(e));
     this.resetButton.addEventListener("click", (e) => this.resetClicked(e));
+    this.showMoreButton.addEventListener("click", async (e) => {
+      e.preventDefault;
+      await this.askClicked(e);
+    });
     this.checkInput();
+  }
+
+  randomNum() {
+    return Math.random() * (0 - 10) + 10;
   }
 
   checkInput() {
@@ -64,38 +75,48 @@ class Ask {
 
   async askClicked(event) {
     event.preventDefault();
+
+    this.useCounter++;
+
+    // Delete all previous results
+    this.resultsList.replaceChildren();
+
     this.loading.classList.add("is-loading");
 
-    const url = "../js/fake-results.json";
+    let url =
+      "https://ai-project.technative.dev.f90.co.uk/ai/ai-destroyer/?query=";
+    let input = document.querySelector(".ask__input").value;
+    input = input.trim().replaceAll(/\s+/g, "+");
+    url += input;
+
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
 
-      // fake a one second wait, use the two lines below for an instant response
-      // const json = await response.json();
-      // this.processResults(json);
+      const json = await response.json();
+      this.processResults(json.results, this.useCounter >= 5);
+      this.loading.classList.remove("is-loading");
 
-      await setTimeout(async () => {
-        const json = await response.json();
-        this.processResults(json);
-        this.loading.classList.remove("is-loading");
-      }, 1000);
+      console.log(document.getElementsByClassName("results__item").length);
     } catch (error) {
       console.error(error.message);
       this.loading.classList.remove("is-loading");
     }
   }
 
-  processResults(data) {
+  // Takes JSON response and whether or not the API has been called 5 or more times
+  processResults(data, threshold) {
+    console.log(data);
+
     if (data.length > 0) {
       this.resultsContainer.classList.add("is-shown");
     } else {
       this.resultsContainer.classList.remove("is-shown");
     }
 
-    data.forEach((result) => {
+    for (const result of data) {
       const resultsItem = document.createElement("div");
       resultsItem.classList.add("results__item");
       this.resultsList.appendChild(resultsItem);
@@ -109,7 +130,20 @@ class Ask {
       resultsItemDescription.classList.add("results__item-description");
       resultsItemDescription.textContent = result.description;
       resultsItem.appendChild(resultsItemDescription);
-    });
+    }
+
+    if (threshold) {
+      const dataCentreTally = document.createElement("div");
+      dataCentreTally.insertAdjacentHTML(
+        "beforeend",
+        `<h3>Congratulations!</h3><p>Your incessant wastefulness has necessitated the construction of ${this.randomNum().toFixed(0)} data centres!</p>`
+      );
+      this.resultsList.appendChild(dataCentreTally);
+    }
+
+    const treeTally = document.createElement("p");
+    treeTally.textContent = `${this.randomNum().toFixed(0)} trees burned in the making of this request!`;
+    this.resultsList.appendChild(treeTally);
   }
 }
 
