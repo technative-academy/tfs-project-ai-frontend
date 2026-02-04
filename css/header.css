@@ -82,3 +82,8 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.header__logo img {
+  height: 8rem;
+  filter: invert(1);
+}
