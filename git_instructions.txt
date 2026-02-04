@@ -1,0 +1,12 @@
+git reset --soft HEAD~1
+git status
+git branch <- this tells you what branch you're on
+git checkout feature/[name of feature]
+  ALTERNATIVE: git checkout -b feature/tabs <- this creates a new branch
+git add .
+git commit -m"Add home page footer"
+git push origin feature/[name of feature]
+
+---- GIT PULLING FOR BEING UP TO DATE WITH MAIN ------
+
+
