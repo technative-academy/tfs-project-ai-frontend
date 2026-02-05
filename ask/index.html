@@ -14,14 +14,14 @@
           <img src="../images/logo.svg" alt="Table Guru logo" />
         </div>
         <nav class="header__nav">
-          <a href="../" class="header__link">Home</a>
-          <a href="../about/" class="header__link">About</a>
-          <a href="./" class="header__link header__link--active">Ask</a>
-          <a href="../shop/" class="header__link">Shop</a>
+          <a href="../index.html" class="header__link">Home</a>
+          <a href="../about/index.html" class="header__link">About</a>
+          <a href="../ask/index.html" class="header__link header__link--active">Ask</a>
+          <a href="../shop/index.html" class="header__link">Shop</a>
         </nav>
       </div>
       <div class="header__titles">
-        <h1 class="header__title">Ask the brains</h1>
+        <h1 class="header__title">Ask the guru</h1>
         <p class="header__subtitle">
           Post an open-ended question here and see some suggestions from our
           specially trained AI...
@@ -32,26 +32,43 @@
       <section class="ask">
         <label for="question" class="ask__label">Ask your question</label>
         <div class="ask__input-wrapper">
-          <textarea
-            id="question"
-            class="ask__input"
-            placeholder="Enter your question here"
-          ></textarea>
-          <button class="ask__button-example">Use an example</button>
-        </div>
-        <div class="ask__footer">
-          <p class="ask__char-count"></p>
-          <div class="ask__buttons">
-            <div class="buttons">
-              <button class="button button--secondary ask__button-reset">
-                Ask a new question
-              </button>
-              <button class="button button--primary ask__button-ask">
-                Ask the brains!
-              </button>
+          <article class="card" aria-label="Question card">
+            <div class="card-banner">
+              <button class="ask__button-example">See example</button>
             </div>
-          </div>
+
+            <header class="card-header">
+              <h1 class="card-title">Question</h1>
+              <div class="card-subtitle">Table Guru</div>
+            </header>
+
+            <div class="card-art">
+              <textarea
+                id="question"
+                class="ask__input"
+                placeholder="Enter your question here"
+              ></textarea>
+              <img
+                src="https://images.unsplash.com/photo-1470770903676-69b98201ea1c?q=80&w=1200&auto=format&fit=crop"
+                alt="A bright mountain landscape"
+              />
+            </div>
+            <div class="ask__footer card-footer">
+              <p class="ask__char-count"></p>
+              <div class="ask__buttons">
+                <div class="buttons">
+                  <button class="button button--secondary ask__button-reset">
+                    Ask a new question
+                  </button>
+                  <button class="button button--primary ask__button-ask">
+                    Ask the guru!
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
+
         <p class="ask__loading">Loading...</p>
       </section>
       <section class="results">
