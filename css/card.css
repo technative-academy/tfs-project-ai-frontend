@@ -1,0 +1,162 @@
+:root {
+  --card-width: 100%;
+  --card-height: 100rm;
+  --card-radius: 4mm;
+  --card-border: 1.2mm;
+  --card-bg: #f5f0e6;
+  --card-ink: #1f1a16;
+  --card-accent: #b33a2b;
+  --card-gold: #c9a24b;
+  --card-shadow: 0 6mm 16mm rgba(0, 0, 0, 0.25);
+  --title-font: var(--title-font);
+  --body-font: var(--body-font);
+  --ui-font: var(--body-font); /*"Oswald", "Arial", sans-serif;*/
+}
+
+/* Usage: apply .card to a container. */
+.card {
+  position: relative;
+  width: var(--card-width);
+  height: var(--card-height);
+  border-radius: var(--card-radius);
+  background: radial-gradient(
+    120% 90% at 20% 0%,
+    #fff4dd 0%,
+    var(--card-bg) 55%,
+    #e7dcc8 100%
+  );
+  color: var(--card-ink);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  border: var(--card-border) solid #3c2c1e;
+  font-family: var(--body-font);
+}
+
+/* Ornate inner frame */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 2.2mm;
+  border-radius: calc(var(--card-radius) - 2mm);
+  border: 0.7mm solid var(--card-gold);
+  box-shadow: inset 0 0 0 0.5mm #f7e6c1;
+  pointer-events: none;
+}
+
+/* Texture overlay */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.025),
+    rgba(0, 0, 0, 0.025) 1mm,
+    transparent 1mm,
+    transparent 2mm
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* Regions */
+.card-header {
+  position: relative;
+  padding: 4mm 4mm 2mm;
+  text-align: center;
+}
+
+.card-title {
+  font-family: var(--title-font);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 14pt;
+  margin: 0;
+}
+
+.card-subtitle {
+  font-family: var(--ui-font);
+  font-size: 8pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 1mm 0 0;
+  color: #5a4637;
+}
+
+.card-art {
+  position: relative;
+  margin: 2mm 4mm 3mm;
+  height: 45mm;
+  border-radius: 2mm;
+  border: 0.8mm solid #2e231a;
+  background: linear-gradient(135deg, #d9cbb8 0%, #efe4d1 60%, #d2c1a7 100%);
+  overflow: hidden;
+}
+
+.card-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.15;
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+}
+
+.card-art textarea {
+  opacity: 0.65;
+}
+
+/* Corner crest for art frame */
+.card-art::before {
+  content: "";
+  position: absolute;
+  inset: 1.2mm;
+  border: 0.5mm solid var(--card-gold);
+  border-radius: 1.2mm;
+  pointer-events: none;
+}
+
+.card-footer {
+  padding: 0 5mm 4mm;
+  font-size: 9.5pt;
+  line-height: 1.2;
+}
+
+.card-footer p {
+  margin: 0 0 2mm;
+}
+
+/*Card banner ribbon to see an example*/
+.card-banner {
+  position: absolute;
+  top: 8mm;
+  right: -20px;
+  transform: rotate(25deg);
+  background: var(--card-accent);
+  color: #fff3df;
+  letter-spacing: inherit;
+  padding: 2mm 24px;
+  box-shadow: 0 1mm 2mm rgba(0, 0, 0, 0.35);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.card-banner button {
+  all: unset;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+.card-banner.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
