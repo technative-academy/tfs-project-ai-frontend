@@ -1,0 +1,11 @@
+.logo {
+  height: 120px;
+  width: auto;
+  object-fit: contain;
+}
+
+.main__image {
+  max-width: 100%;
+  height: auto;
+  margin-top: var(--spacing-m);
+}
