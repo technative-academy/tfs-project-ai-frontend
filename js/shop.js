@@ -6,6 +6,8 @@ class Shop {
     if (this.searchContainer) {
       this.searchInput = this.searchContainer.querySelector(".search__input");
       this.searchButton = this.searchContainer.querySelector(".search__submit");
+      this.offerButton = this.searchContainer.querySelector(".search__offer");
+      this.isOfferSearch = false;
       this.searchResultCount = this.searchContainer.querySelector(
         ".search__result-count"
       );
@@ -22,6 +24,14 @@ class Shop {
     if (!this.searchContainer) return;
     this.searchInput.addEventListener("input", (e) => this.checkInput(e));
     this.searchButton.addEventListener("click", (e) => this.search(e));
+
+    this.offerButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      this.searchInput.value = "offer";
+      this.isOfferSearch = true;
+      this.search();
+    });
+
     if (this.sortSelect) {
       this.sortSelect.addEventListener("change", () => this.search());
     }
@@ -45,7 +55,15 @@ class Shop {
     }
 
     try {
-      const query = this.buildQuery();
+      let query;
+
+      if (this.isOfferSearch) {
+        query = "offer";
+      } else {
+        query = this.buildQuery();
+      }
+      console.log("query=" + query);
+
       const sort = this.getSort();
       const results = await fetchProducts({ query, sort });
       console.log("results:", results);
@@ -60,6 +78,7 @@ class Shop {
     } finally {
       this.loading.classList.remove("is-loading");
     }
+    this.isOfferSearch = false;
   }
 
   buildQuery() {

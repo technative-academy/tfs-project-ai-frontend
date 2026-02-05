@@ -1,42 +1,59 @@
-.buttons {
-  display: flex;
-  gap: var(--spacing-l);
-  align-items: center;
+.main-button-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100% ;
+    column-gap: 40px;
+    row-gap: 40px;
+    padding-top: 60px;
 }
 
-.button {
-  padding: var(--spacing-s) var(--spacing-m);
-  border-radius: var(--border-radius-s);
-  cursor: pointer;
-  transition: all 0.25s;
-  font-family: "Amatic SC", cursive;
+.main-button-column-one{
+    flex: 1;
+    text-align: center;
+    padding-right: 10px;
+    
 }
 
-.button:disabled {
-  opacity: 0.3;
-  pointer-events: none;
+.main-button-column-two{
+    flex: 1;
+    text-align: center;
+    height: auto;
+    object-fit: contain;
+   
 }
 
-.button--primary {
-  border: 1px solid var(--colour-primary);
-  background: var(--colour-primary);
-  color: var(--colour-text-light);
+.button-h2{
+    color: var(--colour-primary);
 }
 
-.button--primary:hover {
-  background: var(--colour-background-white);
-  color: var(--colour-primary);
+.button-hr-style-two{
+    border-top: 1px dashed rgba(233, 119, 119, 0.363);
 }
 
-.button--secondary {
-  background: transparent;
-  border: 1px solid var(--colour-background-light);
-  color: var(--colour-primary);
+.second-button-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100% ;
+    column-gap: 40px;
+    row-gap: 40px;
 }
 
-.button--secondary:hover {
-  border-color: var(--colour-primary);
+.second-button-column-one{
+    flex: 1;
+    text-align: center;
+    padding: 30px;
+    
 }
+
+.second-button-column-two{
+    flex: 1;
+    padding: 30px;
+    text-align: center;
+    height: auto;
+    object-fit: contain;
+   
+}
+
 
 
 
