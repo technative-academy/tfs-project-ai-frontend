@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>About | Ask the Brains</title>
     <link rel="stylesheet" href="../css/style.css" />
-    <script type="module" defer src="../js/script.js"></script>
+    <!-- <script type="module" defer src="../js/script.js"></script> -->
+    <script type="module" defer src="../js/about.js"></script>
   </head>
   <body>
     <header class="header">
@@ -22,18 +23,59 @@
       </div>
       <div class="header__titles">
         <h1 class="header__title">About the brains</h1>
-        <p class="header__subtitle">...</p>
+        <p class="header__subtitle">Some stuff about the app and the team</p>
       </div>
     </header>
+
+
     <main class="main">
-      <p>meeeeeee</p>
+
+      <!-- <p>meeeeeee</p> -->
+
+      <nav>
+          <div class="tab-buttons">
+              <button class="tab-button currently-selected-button" data-target="app">About the app</button>
+              <button class="tab-button" data-target="team">About the team</button>
+          </div>
+      </nav>
+
+      <div class="tab-details tab-details-app currently-selected-tab">
+          <div class="tab-content">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> 
+              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum sint occaecat cupidatat non proident deserunt mollit.</p>
+          </div>
+          <!-- <div class="tab-image">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Mercury_in_color_-_Prockter07-edit1.jpg" alt="Mercury" />
+              <p>(photo caption)</p>
+          </div> -->
+      </div>
+
+      <div class="tab-details tab-details-team">
+          <!-- <div class="tab-image"> -->
+          <div>
+              <img src="../images/team-photo.png" alt="Team photo" class="tab-hero-image"/>
+          <!-- </div> -->
+          </div>
+
+          <div class="tab-content-2cols">
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+              <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p> 
+              <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum anim id est laborum sint occaecat cupidatat non proident deserunt mollit.</p>
+          </div>
+      </div>
+
     </main>
+
+
     <footer class="footer">
       <p class="footer__links">
         <a href="#" class="footer__link">Terms and Conditions</a> |
         <a href="#" class="footer__link">Cookies</a>
       </p>
-      <p class="footer__copyright">&copy; 202x</p>
+      <p class="footer__copyright">&copy; 2026</p>
     </footer>
   </body>
 </html>

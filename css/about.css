@@ -1,0 +1,74 @@
+.tab-buttons {
+    display: flex;
+    gap: 0px;            
+    padding-left: 0px;  
+}
+
+.tab-button {
+    padding: 10px 25px;
+    cursor: pointer;
+    color: grey;
+    /* background: #e0e0e0; Grey for unselected tabs */
+    background: white;
+    border: 0px ;
+    border-bottom: none; /* Removes bottom border so it sits on the content */
+    border-radius: 10px 10px 0 0; /* Rounds only the TOP corners */
+    font-family: inherit;
+    transition: background 0.3s;
+    position: relative;
+    z-index: 1;         /* Keeps tabs above the content box border */
+}
+
+.tab-button.currently-selected-button {
+    color: black;
+    background: white;   /* Matches your main content background */
+    border: 1px solid #ccc;
+    border-bottom: 2px solid white; /* Matches background to "open" the folder */
+    margin-bottom: -2px; /* Pulls the tab down to cover the content's border */
+    /* font-weight: bold; */
+    z-index: 3;          /* Ensures it stays on top */
+}
+
+
+.tab-details {
+    display: none;
+    border-top: 1px solid #ccc;
+}
+
+/* .tab-details.currently-selected-tab {
+    display: flex;
+    align-items: flex-start;
+} */
+.tab-details.currently-selected-tab {
+    display: flex;
+    flex-direction: column; /* This stacks image on top, text on bottom */
+    align-items: center;    /* Centers the image and text horizontally */
+}
+
+.tab-hero-image {
+    width: 100%;           
+    max-width: 100%;       /* Ensures it doesn't overflow */
+    height: auto;          /* Maintains aspect ratio so it isn't squished */
+    border-radius: 5px;    
+    margin-bottom: 20px;   
+    margin-top: 20px;
+}
+
+
+.tab-content{
+    text-align: left;
+}
+.tab-content-2cols {
+    column-count: 2;
+    column-gap: 20 px;
+    text-align: justify;
+    margin-top: 0px;
+    width: 100%;
+}
+.tab-content-2cols p {
+    break-inside: avoid;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+
