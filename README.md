@@ -1,5 +1,3 @@
-# AI Project Frontend
+# AI Destroyer
 
-This is an example frontend for the AI project.
-
-You will want to fork this repository so that you can integrate the API and make modifications to the design and functionality.
+#### Finn, Amro and Kristy's satirical generative AI project that helpfully reminds you of how much energy you're wasting and how many trees you're burning!
