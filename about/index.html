@@ -1,18 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>About | Ask the Brains</title>
+
+    <title>About | Sandwich Time</title>
+
     <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/about.css" />
+
     <script type="module" defer src="../js/script.js"></script>
   </head>
+
   <body>
     <header class="header">
       <div class="header__content">
         <div class="header__logo">
-          <img src="../images/logo.png" alt="Ask the brains" />
+          <img src="../images/logo.png" alt="Ask the Brains" />
         </div>
+
         <nav class="header__nav">
           <a href="../" class="header__link">Home</a>
           <a href="./" class="header__link header__link--active">About</a>
@@ -20,20 +26,147 @@
           <a href="../shop/" class="header__link">Shop</a>
         </nav>
       </div>
+
       <div class="header__titles">
-        <h1 class="header__title">About the brains</h1>
-        <p class="header__subtitle">...</p>
+        <h1 class="header__title">About Sandwich Time</h1>
+        <p class="header__subtitle">
+          Who we are and the people between the bread
+        </p>
       </div>
     </header>
+
     <main class="main">
-      <p>...</p>
+      <section class="about section section__column">
+        <div class="about__tabs buttons">
+          <button
+            class="button about__tab about__tab--active"
+            data-tab="company"
+            type="button"
+          >
+            About the Company
+          </button>
+
+          <button class="button about__tab" data-tab="team" type="button">
+            Our Team
+          </button>
+        </div>
+
+        <div class="about__panel about__panel--active" id="company">
+          <!-- ROW 1: HERO IMAGE (single column grid) -->
+          <div class="about__row">
+            <div class="about__box">
+              <img
+                src="../images/about-hero.webp"
+                alt="Sandwich Time head office"
+                class="about__image"
+              />
+            </div>
+          </div>
+
+          <!-- ROW 2: TEXT + IMAGE (two-column grid) -->
+          <div class="about__row section__content--left-text">
+            <div class="about__box">
+              <div class="about__text">
+                <p>
+                  Based by the sea in Sandwich Bay in Kent, our seaview café and
+                  offices are the perfect spot to relax with a sandwich.
+                </p>
+                <p>
+                  Founded in 2000, we have become the most popular sandwich shop
+                  in the South-East and cater for over 100 events per year.
+                </p>
+              </div>
+            </div>
+
+            <div class="about__box">
+              <img
+                src="../images/about-cafe.jpg"
+                alt="Inside Sandwich Time café"
+                class="about__image"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="about__panel" id="team">
+          <div class="about__team section__row section__row--wrap">
+            <article class="about__member">
+              <div class="about__member-inner">
+                <div class="about__member-front">
+                  <img
+                    src="../images/team-placeholder.jpg"
+                    alt="Jo – Sandwich Guru"
+                  />
+                  <h3>Jo</h3>
+                </div>
+                <div class="about__member-back">
+                  <p>Sandwich Guru</p>
+                  <p>Loves a Toasted Cheese on Sourdough</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="about__member">
+              <div class="about__member-inner">
+                <div class="about__member-front">
+                  <img
+                    src="../images/team-placeholder.jpg"
+                    alt="Sandy – Sandwich Artist"
+                  />
+                  <h3>Sandy</h3>
+                </div>
+                <div class="about__member-back">
+                  <p>Sandwich Artist</p>
+                  <p>Loves a salmon and cream cheese bagel.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="about__member">
+              <div class="about__member-inner">
+                <div class="about__member-front">
+                  <img
+                    src="../images/team-placeholder-2.jpg"
+                    alt="Emma – Sandwich Engineer"
+                  />
+                  <h3>Emma</h3>
+                </div>
+                <div class="about__member-back">
+                  <p>Sandwich Engineer</p>
+                  <p>
+                    Obsessed with weird sandwich combos. Peanut butter and
+                    frickles anyone?
+                  </p>
+                </div>
+              </div>
+            </article>
+
+            <article class="about__member">
+              <div class="about__member-inner">
+                <div class="about__member-front">
+                  <img src="../images/Steve.png" alt="Steve – Chief taster" />
+                  <h3>Steve</h3>
+                </div>
+                <div class="about__member-back">
+                  <p>Chief taster</p>
+                  <p>
+                    Happy to eat almost anything! Prefers not to pay. Favourite
+                    sandwich is a chip butty but he's not that fussy.
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
     </main>
+
     <footer class="footer">
       <p class="footer__links">
         <a href="#" class="footer__link">Terms and Conditions</a> |
         <a href="#" class="footer__link">Cookies</a>
       </p>
-      <p class="footer__copyright">&copy; 202x</p>
+      <p class="footer__copyright">&copy; 202x Ask the Brains</p>
     </footer>
   </body>
 </html>
