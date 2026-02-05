@@ -5,6 +5,7 @@
 .section__row {
   display: flex;
   flex-direction: row;
+  align-items: stretch;
 
   > * {
     flex: 1;
