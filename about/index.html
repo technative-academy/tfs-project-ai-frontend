@@ -12,20 +12,31 @@
   <body>
     <header class="header">
       <div class="header__content">
-        <div class="header__logo">
-          <img src="../images/logo.svg" alt="Table Guru logo" />
-        </div>
-        <nav class="header__nav">
+        <a href="../index.html" class="header__logo">
+          <span class="header__logo-text">Table<br />Guru</span>
+        </a>
+        <button
+          class="header__menu-toggle"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <span>MENU</span>
+          <span class="header__hamburger"></span>
+        </button>
+        <nav class="header__nav" id="header-nav">
           <a href="../index.html" class="header__link">Home</a>
-          <a href="../about/index.html" class="header__link header__link--active">About</a>
+          <a href="../about/index.html" class="header__link header__link--active"
+            >About</a
+          >
           <a href="../ask/index.html" class="header__link">Ask</a>
           <a href="../shop/index.html" class="header__link">Shop</a>
         </nav>
       </div>
       <div class="header__titles">
-        <h1 class="header__title">About the Table Guru</h1>
-        <pre class="header__subtitle">Who we are , what we do,
-why we are , where we do</pre>
+        <h1 class="header__title">About Table Guru</h1>
+        <p class="header__subtitle">
+          Who we are, what we do,<br />why we are, where we do
+        </p>
       </div>
     </header>
     <main class="main">

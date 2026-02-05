@@ -10,10 +10,18 @@
   <body>
     <header class="header">
       <div class="header__content">
-        <div class="header__logo">
-          <img src="../images/logo.svg" alt="Table Guru logo" />
-        </div>
-        <nav class="header__nav">
+        <a href="../index.html" class="header__logo">
+          <span class="header__logo-text">Table<br />Guru</span>
+        </a>
+        <button
+          class="header__menu-toggle"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <span>MENU</span>
+          <span class="header__hamburger"></span>
+        </button>
+        <nav class="header__nav" id="header-nav">
           <a href="../index.html" class="header__link">Home</a>
           <a href="../about/index.html" class="header__link">About</a>
           <a href="../ask/index.html" class="header__link">Ask</a>
@@ -23,10 +31,10 @@
         </nav>
       </div>
       <div class="header__titles">
-        <h1 class="header__title">Buy from the guru</h1>
+        <h1 class="header__title">Buy from the Guru</h1>
         <p class="header__subtitle">
-          We need to shift some of this stuff so we can continue to operate,
-          please help us
+          We need to shift some of this stuff so we can<br />continue to
+          operate, please help us
         </p>
       </div>
     </header>
