@@ -6,6 +6,18 @@
 
 .about__tabs {
   margin-bottom: 2rem;
+  border-bottom: 1px solid var(--colour-primary);
+  padding-left: 1em;
+}
+
+.about__tab {
+  border: 1px solid var(--colour-primary);
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background: var(--colour-background-white);
+
+  color: var(--colour-primary);
 }
 
 .about__tab--active {
@@ -96,13 +108,13 @@
 
 /* responsive */
 
-@media (max-width: 900px) {
+@media (width <= 900px) {
   .about__member {
     flex: 0 0 calc(50% - 1rem);
   }
 }
 
-@media (max-width: 500px) {
+@media (width <= 500px) {
   .about__team {
     flex-direction: column;
   }
