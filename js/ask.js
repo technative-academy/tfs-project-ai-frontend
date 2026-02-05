@@ -15,6 +15,8 @@ class Ask {
 
       this.resultsContainer = document.querySelector(".results");
       this.resultsList = this.resultsContainer.querySelector(".results__list");
+
+      this.showMoreButton = this.resultsContainer.querySelector(".results__show-more-button");
     }
   }
 
@@ -23,6 +25,7 @@ class Ask {
     this.askInput.addEventListener("input", (e) => this.checkInput(e));
     this.exampleButton.addEventListener("click", (e) => this.setExample(e));
     this.askButton.addEventListener("click", (e) => this.askClicked(e));
+    this.showMoreButton.addEventListener("click", (e) => this.askClicked(e));
     this.resetButton.addEventListener("click", (e) => this.resetClicked(e));
     this.checkInput();
   }
