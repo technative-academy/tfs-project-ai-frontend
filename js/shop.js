@@ -38,7 +38,8 @@ class Shop {
       this.productsList.removeChild(this.productsList.lastChild);
     }
 
-    const url = "../js/fake-products.json";
+    const url =
+      "https://ai-project.technative.dev.f90.co.uk/products/video-games/";
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -58,7 +59,8 @@ class Shop {
 
   processProducts(data) {
     const searchTerm = this.searchInput.value.toLowerCase();
-    const filteredProducts = data.filter(
+    console.log(data);
+    const filteredProducts = data.products.filter(
       (product) =>
         product.title.toLowerCase().includes(searchTerm) ||
         product.description.toLowerCase().includes(searchTerm)
