@@ -101,7 +101,7 @@ class Shop {
 
       const productsItemPrice = document.createElement("p");
       productsItemPrice.classList.add("products__item-price");
-      productsItemPrice.textContent = product.price;
+      productsItemPrice.textContent = "£" + product.price;
       productsItem.appendChild(productsItemPrice);
     });
   }
