@@ -17,7 +17,9 @@
           <a href="../index.html" class="header__link">Home</a>
           <a href="../about/index.html" class="header__link">About</a>
           <a href="../ask/index.html" class="header__link">Ask</a>
-          <a href="../shop/index.html" class="header__link header__link--active">Shop</a>
+          <a href="../shop/index.html" class="header__link header__link--active"
+            >Shop</a
+          >
         </nav>
       </div>
       <div class="header__titles">
@@ -31,12 +33,39 @@
     <main class="main">
       <section class="search">
         <div class="search__input-wrapper">
-          <input
-            type="text"
-            class="search__input"
-            placeholder="Search products"
-          />
-          <button class="button button--primary search__submit">Search!</button>
+          <article class="card" aria-label="Product card">
+            <div class="card-banner">
+              <button type="button" class="search_offer">Limited offers</button>
+            </div>
+
+            <header class="card-header">
+              <h1 class="card-title">What's availible</h1>
+              <div class="card-subtitle">Table Guru</div>
+            </header>
+
+            <div class="card-art" id="search-card">
+              <input
+                type="text"
+                class="search__input"
+                placeholder="Search products"
+              />
+
+              <img
+                src="https://images.unsplash.com/photo-1470770903676-69b98201ea1c?q=80&w=1200&auto=format&fit=crop"
+                alt="A bright mountain landscape"
+              />
+            </div>
+            <div class="ask__footer card-footer">
+              <p class="ask__char-count"></p>
+              <div class="ask__buttons">
+                <div class="buttons">
+                  <button class="button button--primary search__submit">
+                    Search!
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
         </div>
         <div class="search__footer">
           <p class="search__result-count"></p>
@@ -48,7 +77,7 @@
       </section>
       <section class="products">
         <h2 class="products__title">Products</h2>
-        <div class="products__list"></div>
+        <ul class="products__list"></ul>
         <div class="products__show-more">
           <button class="button button--primary">Show more</button>
         </div>

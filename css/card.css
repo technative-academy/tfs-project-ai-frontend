@@ -106,7 +106,12 @@
   z-index: 1;
 }
 
-.card-art textarea {
+#search-card {
+  height: 25mm;
+}
+
+.card-art textarea,
+input {
   opacity: 0.65;
 }
 
@@ -154,6 +159,7 @@
   color: inherit;
   font: inherit;
   letter-spacing: inherit;
+  z-index: 2;
 }
 
 .card-banner.is-hidden {
