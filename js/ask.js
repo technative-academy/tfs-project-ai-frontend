@@ -10,6 +10,7 @@ class Ask {
       this.exampleButton = this.askContainer.querySelector(
         ".ask__button-example"
       );
+      this.banner = this.askContainer.querySelector(".card-banner");
       this.askButton = this.askContainer.querySelector(".ask__button-ask");
       this.resetButton = this.askContainer.querySelector(".ask__button-reset");
       this.charCounter = this.askContainer.querySelector(".ask__char-count");
@@ -45,8 +46,10 @@ class Ask {
     if (this.askInput.value.length === 0) {
       this.askButton.disabled = true;
       this.exampleButton.classList.remove("is-hidden");
+      this.banner.classList.remove("is-hidden");
     } else {
       this.exampleButton.classList.add("is-hidden");
+      this.banner.classList.add("is-hidden");
     }
   }
 
@@ -129,4 +132,3 @@ class Ask {
 
 // Expose an instance of the 'Ask' class
 export default new Ask();
-
