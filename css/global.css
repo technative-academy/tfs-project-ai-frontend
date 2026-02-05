@@ -1,12 +1,14 @@
 /* Variables */
 :root {
-  --colour-primary: #6200ea;
-  --colour-secondary: #ff0080;
+  --colour-primary: #a78bfa;
+  --colour-secondary: #f472b6;
   --colour-background-white: white;
   --colour-background-light: #f0f0f0;
   --colour-background-dark: black;
   --colour-text-light: white;
   --colour-text-dark: black;
+
+  --colour-accent: #f472b6;
 
   --width-max: 800px;
 
@@ -43,4 +45,5 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
+  /*background: radial-gradient(var(--colour-secondary), var(--colour-primary));*/
 }
