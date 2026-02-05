@@ -1,0 +1,17 @@
+.about-app-content {
+
+}
+
+.about-team-content {
+    display: none;
+}
+
+.about-content {
+    padding: 20px;
+    font-size: 1.2em;
+}
+
+.about-image {
+    width: 90%;
+    margin-bottom: 10px;
+}
