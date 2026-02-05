@@ -1,4 +1,7 @@
 .main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   padding: var(--spacing-l);
   max-width: var(--width-max);
   margin-left: auto;
@@ -7,4 +10,14 @@
   background: var(--colour-background-white);
   border-radius: var(--border-radius-l);
   box-shadow: var(--box-shadow);
+}
+
+.main img {
+  height: 20rem;
+}
+
+@media (max-width: 800px) {
+  .main img {
+    height: 10rem;
+  }
 }
