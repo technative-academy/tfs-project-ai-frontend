@@ -31,13 +31,15 @@ class Ask {
     // check submission validity
     const charsRemaining = this.maxLength - this.askInput.value.length;
     if (charsRemaining < 0) {
+      const overBy = Math.abs(charsRemaining);
       this.askButton.disabled = true;
       this.charCounter.classList.add("has-error");
+      this.charCounter.textContent = `HERESY DETECTED: reduce by ${overBy} characters`;
     } else {
       this.askButton.disabled = false;
       this.charCounter.classList.remove("has-error");
+      this.charCounter.textContent = `${charsRemaining} characters remaining`;
     }
-    this.charCounter.textContent = `${charsRemaining} characters remaining`;
 
     // check whether to display example button
     if (this.askInput.value.length === 0) {
@@ -51,8 +53,7 @@ class Ask {
   setExample(event) {
     event.preventDefault();
     console.log("setting example");
-    this.askInput.value =
-      "Tell me about some of the best things I could see with a telescope from Brighton (assuming it ever stops raining)";
+    this.askInput.value = "What is our aim?";
     this.checkInput();
   }
 
@@ -66,22 +67,16 @@ class Ask {
     event.preventDefault();
     this.loading.classList.add("is-loading");
 
-    const url = "../js/fake-results.json";
+    const url = `https://ai-project.technative.dev.f90.co.uk/ai/warhammer?${new URLSearchParams({ query: this.askInput.value })}`;
+
     try {
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
 
-      // fake a one second wait, use the two lines below for an instant response
-      // const json = await response.json();
-      // this.processResults(json);
-
-      await setTimeout(async () => {
-        const json = await response.json();
-        this.processResults(json);
-        this.loading.classList.remove("is-loading");
-      }, 1000);
+      const json = await response.json();
+      this.processResults(json);
     } catch (error) {
       console.error(error.message);
       this.loading.classList.remove("is-loading");
