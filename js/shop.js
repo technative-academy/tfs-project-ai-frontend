@@ -13,14 +13,24 @@ class Shop {
       this.productsContainer = document.querySelector(".products");
       this.productsList =
         this.productsContainer.querySelector(".products__list");
+
+      this.showMoreButton = this.productsContainer.querySelector(".products__show-more-button");
+
+      this.page = 0;
+      this.productCount = 0;
     }
   }
 
   init() {
     if (!this.searchContainer) return;
     this.searchInput.addEventListener("input", (e) => this.checkInput(e));
-    this.searchButton.addEventListener("click", (e) => this.search(e));
-    this.searchSort.addEventListener("change", (_e) => this.sort());
+    this.searchButton.addEventListener("click", (e) => {
+      if (e) e.preventDefault();
+      this.search();
+    });
+    this.showMoreButton.addEventListener("click", (_e) => {
+      this.search(this.page + 1);
+    });
 
     this.checkInput();
     this.search();
@@ -30,52 +40,27 @@ class Shop {
     this.searchButton.disabled = this.searchInput.value.length === 0;
   }
 
-  async sort() {
-    let sortType = this.searchSort.value;
-    const elements = [...this.productsList.children];
-
-    if (sortType === "price-asc") {
-      elements.sort((a, b) => {
-        let a_price = parseFloat(a.querySelector(".products__item-price").textContent);
-        let b_price = parseFloat(b.querySelector(".products__item-price").textContent);
-
-        return a_price - b_price;
-      });
-    } else if (sortType === "price-desc") {
-      elements.sort((a, b) => {
-        let a_price = parseFloat(a.querySelector(".products__item-price").textContent);
-        let b_price = parseFloat(b.querySelector(".products__item-price").textContent);
-
-        return b_price - a_price;
-      });
-    }
-    else if (sortType === "alpha") {
-      elements.sort((a, b) => {
-        let a_name = a.querySelector(".products__item-title").textContent;
-        let b_name = b.querySelector(".products__item-title").textContent;
-
-        return a_name.localeCompare(b_name);
-      });
-    } else {
-      console.log("Error: unknown sort type");
-    }
-
-    elements.forEach(element => this.productsList.appendChild(element));
-  }
-
-  async search(e) {
-    if (e) e.preventDefault();
+  async search(page) {
+    this.page = (page ?? 1);
 
     this.loading.classList.add("is-loading");
-    this.productsContainer.classList.remove("is-shown");
-    this.searchResultCount.textContent = "";
 
-    while (this.productsList.firstChild) {
-      this.productsList.removeChild(this.productsList.lastChild);
+    // "New request" pathway.
+    // We don't want to hide the entries if the user clicks "show more".
+    if (this.page == 1) {
+      this.productsContainer.classList.remove("is-shown");
+      this.searchResultCount.textContent = "";
+      this.showMoreButton.disabled = false;
+      this.productCount = 0;
+
+      // Only remove products if making a new request.
+      while (this.productsList.firstChild) {
+        this.productsList.removeChild(this.productsList.lastChild);
+      }
     }
 
     const url =
-      "https://ai-project.technative.dev.f90.co.uk/products/sandwich/";
+      `https://ai-project.technative.dev.f90.co.uk/products/sandwich?page-size=6&page=${this.page}&sort=${this.searchSort.value ?? "title"}`;
     try {
       const response = await fetch(url);
       if (!response.ok) {
@@ -86,7 +71,6 @@ class Shop {
       this.processProducts(json.products);
       this.loading.classList.remove("is-loading");
 
-      this.sort();
     } catch (error) {
       console.error(error.message);
       this.loading.classList.remove("is-loading");
@@ -101,7 +85,18 @@ class Shop {
         product.description.toLowerCase().includes(searchTerm)
     );
 
-    this.searchResultCount.textContent = `${filteredProducts.length} products found`;
+    if (filteredProducts.length == 0)  {
+      // Disable the show more button
+      this.showMoreButton.disabled = true;
+      return;
+    }
+
+    this.productCount += filteredProducts.length;
+    if (this.productCount == 1) {
+      this.searchResultCount.textContent = `${this.productCount} product found`;
+    } else {
+      this.searchResultCount.textContent = `${this.productCount} products found`;
+    }
 
     if (filteredProducts.length > 0) {
       this.productsContainer.classList.add("is-shown");
