@@ -33,6 +33,8 @@
 
 .products__item-image {
   width: 100%;
+  /* height: 250px;
+  width: 200px; */
 }
 
 .products__show-more {
