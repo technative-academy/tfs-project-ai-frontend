@@ -12,11 +12,11 @@ class Ask {
       this.askButton = this.askContainer.querySelector(".ask__button-ask");
       this.resetButton = this.askContainer.querySelector(".ask__button-reset");
       this.charCounter = this.askContainer.querySelector(".ask__char-count");
-      this.loading = this.askContainer.querySelector(".ask__loading");
-
+      
       this.showMoreButton = document.querySelector(".showmore__button");
-
+      
       this.resultsContainer = document.querySelector(".results");
+      this.loading = this.resultsContainer.querySelector(".ask__loading");
       this.resultsList = this.resultsContainer.querySelector(".results__list");
     }
   }
@@ -63,7 +63,7 @@ class Ask {
     event.preventDefault();
     console.log("setting example");
     this.askInput.value =
-      "Tell me about some of the best things I could see with a telescope from Brighton (assuming it ever stops raining)";
+      "Tell me a funny joke";
     this.checkInput();
   }
 
