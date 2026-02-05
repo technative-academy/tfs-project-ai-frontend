@@ -1,14 +1,15 @@
 /* Variables */
 :root {
-  --colour-primary: #73956f;
-  --colour-secondary: #dda15e;
+  --colour-primary: #1dbce0;
+  --colour-secondary: #ffa348;
   --colour-background-white: white;
-  --colour-background-light: #fefae0;
+  --colour-background-light: white;
   --colour-background-dark: black;
   --colour-text-light: white;
   --colour-text-dark: black;
 
   --width-max: 800px;
+  --width-header: 1100px;
 
   --spacing-xs: 8px;
   --spacing-s: 10px;
@@ -43,4 +44,5 @@ body {
   margin: 0;
   padding: 0;
   text-align: center;
+  background-color: var(--colour-background-light);
 }

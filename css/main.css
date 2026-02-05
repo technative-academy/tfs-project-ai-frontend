@@ -7,4 +7,6 @@
   background: var(--colour-background-white);
   border-radius: var(--border-radius-l);
   box-shadow: var(--box-shadow);
+  position: relative;
+
 }
