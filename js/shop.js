@@ -60,13 +60,16 @@ class Shop {
   processProducts(data) {
     const searchTerm = this.searchInput.value.toLowerCase();
     console.log(data);
-    const filteredProducts = data.products.filter(
+    // const filteredProducts = data.products.filter(
+    let filteredProducts = data.products.filter(
       (product) =>
         product.title.toLowerCase().includes(searchTerm) ||
         product.description.toLowerCase().includes(searchTerm)
     );
 
     this.searchResultCount.textContent = `${filteredProducts.length} products found`;
+
+    filteredProducts = filteredProducts.slice(0, 6);
 
     if (filteredProducts.length > 0) {
       this.productsContainer.classList.add("is-shown");
@@ -81,7 +84,10 @@ class Shop {
 
       const productsItemImage = document.createElement("img");
       productsItemImage.classList.add("products__item-image");
-      productsItemImage.src = product.img;
+
+      const baseUrl = "https://ai-project.technative.dev.f90.co.uk";
+      // productsItemImage.src = product.img;
+      productsItemImage.src = baseUrl + product.image;
       productsItem.appendChild(productsItemImage);
 
       const productsItemTitle = document.createElement("h3");
