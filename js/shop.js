@@ -175,10 +175,13 @@ class Shop {
       productsItem.classList.add("products__item");
       this.productsList.appendChild(productsItem);
 
+      const childProductsItem = document.createElement("div");
+      childProductsItem.classList.add("products__img-container");
+      productsItem.appendChild(childProductsItem);
       const productsItemImage = document.createElement("img");
       productsItemImage.classList.add("products__item-image");
       productsItemImage.src = product.image;
-      productsItem.appendChild(productsItemImage);
+      childProductsItem.appendChild(productsItemImage);
 
       const productsItemTitle = document.createElement("h3");
       productsItemTitle.classList.add("products__item-title");
