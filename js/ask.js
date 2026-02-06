@@ -57,7 +57,7 @@ class Ask {
     event.preventDefault();
     console.log("setting example");
     this.askInput.value =
-      "Tell me about some of the best things I could see with a telescope from Brighton (assuming it ever stops raining)";
+      "If you could invent a board game, what would the most unhinged theme be?";
     this.checkInput();
   }
 
