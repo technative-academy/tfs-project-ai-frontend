@@ -1,7 +1,9 @@
 /* Variables */
 :root {
-  --colour-primary: #ca1551ff;
-  --colour-secondary: #eac435ff;
+  --colour-primary: #ca1551;
+  --colour-secondary: #eac435;
+  --colour-secondary-rgb: rgb(234, 196, 53);
+
   --colour-background-white: white;
   --colour-background-light: lightgray;
   --colour-background-dark: #03cea4ff;
