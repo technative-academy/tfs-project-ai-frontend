@@ -88,7 +88,7 @@
 }
 
 .header__logo-icon {
-  height: clamp(2.2rem, 3.5vw, 2.8rem);
+  height: clamp(3rem, 3.5vw, 3rem);
   width: auto;
   flex-shrink: 0;
   transition: transform 0.3s ease;
@@ -112,8 +112,6 @@
 .header__nav {
   display: flex;
   gap: clamp(var(--spacing-m), 2.5vw, var(--spacing-xl));
-  border-bottom: 2px solid var(--colour-primary);
-  padding-bottom: 6px;
   align-items: center;
 }
 

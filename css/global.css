@@ -3,14 +3,14 @@
   --colour-primary: #1dbce0;
   --colour-secondary: #739470;
   --colour-background-white: white;
-  --colour-background-light: white;
+  --colour-background-light: #f8fafc;
   --colour-background-dark: black;
   --colour-primary-dark:#5a7a56;
   --colour-text-light: white;
   --colour-text-dark: black;
 
   --width-max: 800px;
-  --width-header: 1100px;
+  --width-header: 800px;
 
   --spacing-xs: 8px;
   --spacing-s: 10px;
