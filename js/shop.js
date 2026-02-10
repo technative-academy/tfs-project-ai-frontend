@@ -12,13 +12,25 @@ class Shop {
       this.productsContainer = document.querySelector(".products");
       this.productsList =
         this.productsContainer.querySelector(".products__list");
-    }
+
+      this.showMoreButton = this.productsContainer.querySelector(".products__show-more .button");        
+
+      this.allFilteredProducts = [];
+      this.currentlyDisplayedCount = 0;
+      this.productsPerLoad = 6;
+      
+      }
   }
 
   init() {
     if (!this.searchContainer) return;
     this.searchInput.addEventListener("input", (e) => this.checkInput(e));
     this.searchButton.addEventListener("click", (e) => this.search(e));
+
+    if (this.showMoreButton) {
+      this.showMoreButton.addEventListener("click", () => this.showMoreProducts());
+    }
+
     this.checkInput();
     this.search();
   }
@@ -34,6 +46,13 @@ class Shop {
     this.productsContainer.classList.remove("is-shown");
     this.searchResultCount.textContent = "";
 
+    this.allFilteredProducts = [];
+    this.currentlyDisplayedCount = 0;
+
+    if (this.showMoreButton) {
+      this.showMoreButton.parentElement.style.display = 'none';
+    }
+    
     while (this.productsList.firstChild) {
       this.productsList.removeChild(this.productsList.lastChild);
     }
@@ -59,6 +78,7 @@ class Shop {
 
   processProducts(data) {
     const searchTerm = this.searchInput.value.toLowerCase();
+
     console.log(data);
     // const filteredProducts = data.products.filter(
     let filteredProducts = data.products.filter(
@@ -69,7 +89,11 @@ class Shop {
 
     this.searchResultCount.textContent = `${filteredProducts.length} products found`;
 
-    filteredProducts = filteredProducts.slice(0, 6);
+    // filteredProducts = filteredProducts.slice(0, 6);
+
+    this.allFilteredProducts = filteredProducts;
+    this.currentlyDisplayedCount = 0;
+    this.displayNextProducts();
 
     if (filteredProducts.length > 0) {
       this.productsContainer.classList.add("is-shown");
@@ -77,41 +101,103 @@ class Shop {
       this.productsContainer.classList.remove("is-shown");
     }
 
-    filteredProducts.forEach((product) => {
-      const productsItem = document.createElement("div");
-      productsItem.classList.add("products__item");
-      this.productsList.appendChild(productsItem);
+    // filteredProducts.forEach((product) => {
+    //   const productsItem = document.createElement("div");
+    //   productsItem.classList.add("products__item");
+    //   this.productsList.appendChild(productsItem);
 
-      const productsItemImage = document.createElement("img");
-      productsItemImage.classList.add("products__item-image");
+    //   const productsItemImage = document.createElement("img");
+    //   productsItemImage.classList.add("products__item-image");
 
-      const baseUrl = "https://ai-project.technative.dev.f90.co.uk";
-      // productsItemImage.src = product.img;
-      productsItemImage.src = baseUrl + product.image;
-      productsItem.appendChild(productsItemImage);
+    //   const baseUrl = "https://ai-project.technative.dev.f90.co.uk";
+    //   // productsItemImage.src = product.img;
+    //   productsItemImage.src = baseUrl + product.image;
+    //   productsItem.appendChild(productsItemImage);
 
-      const productsItemTitle = document.createElement("h3");
-      productsItemTitle.classList.add("products__item-title");
-      productsItemTitle.textContent = product.title;
-      productsItem.appendChild(productsItemTitle);
+    //   const productsItemTitle = document.createElement("h3");
+    //   productsItemTitle.classList.add("products__item-title");
+    //   productsItemTitle.textContent = product.title;
+    //   productsItem.appendChild(productsItemTitle);
 
-      const productsItemDescription = document.createElement("p");
-      productsItemDescription.classList.add("products__item-description");
-      productsItemDescription.textContent = product.description;
-      productsItem.appendChild(productsItemDescription);
+    //   const productsItemDescription = document.createElement("p");
+    //   productsItemDescription.classList.add("products__item-description");
+    //   productsItemDescription.textContent = product.description;
+    //   productsItem.appendChild(productsItemDescription);
 
-      const productsItemStars = document.createElement("p");
-      productsItemStars.classList.add("products__item-stars");
-      productsItemStars.textContent = "⭐".repeat(product.stars);
-      productsItem.appendChild(productsItemStars);
+    //   const productsItemStars = document.createElement("p");
+    //   productsItemStars.classList.add("products__item-stars");
+    //   productsItemStars.textContent = "⭐".repeat(product.stars);
+    //   productsItem.appendChild(productsItemStars);
 
-      const productsItemPrice = document.createElement("p");
-      productsItemPrice.classList.add("products__item-price");
-      productsItemPrice.textContent = "£" + product.price;
-      productsItem.appendChild(productsItemPrice);
-    });
+    //   const productsItemPrice = document.createElement("p");
+    //   productsItemPrice.classList.add("products__item-price");
+    //   productsItemPrice.textContent = "£" + product.price;
+    //   productsItem.appendChild(productsItemPrice);
+    // });
+
+  }
+// }
+
+
+displayNextProducts() {
+  // Calculate how many products to show
+  const nextBatch = this.allFilteredProducts.slice(
+    this.currentlyDisplayedCount,
+    this.currentlyDisplayedCount + this.productsPerLoad
+  );
+
+  nextBatch.forEach((product) => {
+    const productsItem = document.createElement("div");
+    productsItem.classList.add("products__item");
+    this.productsList.appendChild(productsItem);
+
+    const productsItemImage = document.createElement("img");
+    productsItemImage.classList.add("products__item-image");
+
+    const baseUrl = "https://ai-project.technative.dev.f90.co.uk";
+    productsItemImage.src = baseUrl + product.image;
+    productsItem.appendChild(productsItemImage);
+
+    const productsItemTitle = document.createElement("h3");
+    productsItemTitle.classList.add("products__item-title");
+    productsItemTitle.textContent = product.title;
+    productsItem.appendChild(productsItemTitle);
+
+    const productsItemDescription = document.createElement("p");
+    productsItemDescription.classList.add("products__item-description");
+    productsItemDescription.textContent = product.description;
+    productsItem.appendChild(productsItemDescription);
+
+    const productsItemStars = document.createElement("p");
+    productsItemStars.classList.add("products__item-stars");
+    productsItemStars.textContent = "⭐".repeat(product.stars);
+    productsItem.appendChild(productsItemStars);
+
+    const productsItemPrice = document.createElement("p");
+    productsItemPrice.classList.add("products__item-price");
+    productsItemPrice.textContent = "£" + product.price;
+    productsItem.appendChild(productsItemPrice);
+  });
+
+  this.currentlyDisplayedCount += nextBatch.length;
+
+  if (this.showMoreButton) {
+    if (this.currentlyDisplayedCount < this.allFilteredProducts.length) {
+      this.showMoreButton.parentElement.style.display = 'block';
+      
+      const remaining = this.allFilteredProducts.length - this.currentlyDisplayedCount;
+      this.showMoreButton.textContent = `Show ${Math.min(this.productsPerLoad, remaining)} more`;
+    } else {
+      this.showMoreButton.parentElement.style.display = 'none';
+    }
+  }
+  }
+
+  showMoreProducts() {
+    this.displayNextProducts();
   }
 }
+
 
 // Expose an instance of the 'Shop' class
 export default new Shop();
