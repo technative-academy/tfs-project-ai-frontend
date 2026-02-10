@@ -59,7 +59,7 @@
 }
 
 .btn-primary:hover {
-  background-color: #5a7a56;
+  background-color: var(--colour-primary-dark);
   color: white;
   border: none;
 }
@@ -87,4 +87,3 @@
 .btn-outline:active {
   transform: scale(0.98); 
 }
-
