@@ -68,6 +68,7 @@ class Ask {
 
     // get the query
     this.askInput.value = this.askInput.value.trim().toLowerCase();
+    console.log(this.askInput.value)
 
     // format the query to fit the url
     const query = this.askInput.value.split(" ").join("+");
